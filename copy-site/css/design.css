@@ -1,0 +1,125 @@
+body{
+  text-align: center;
+  margin: 0;
+  padding: 0;
+  font-family:Verdana,Arial,Helvetica,'meirio','メイリオ','Hiragino Maru Gothic Pro','ヒラギノ丸ゴ Pro W4',Osaka,'ＭＳＰゴシック',sans-serif;
+}
+#wrapper{
+  border-top: solid 8px rgb(231, 174, 30);
+  padding: 0;
+  margin: 0;
+}
+#headerWrapper{
+  padding: 0;
+  margin: 0 auto 20px;
+  width: 900px;
+}
+header{
+  position: relative;
+  height: 200px;
+}
+.siteTitle{
+  position: absolute;
+  top: 30px;
+  left: 0;
+}
+.description{
+  position: absolute;
+  font-size: 10px;
+  top: 10px;
+  right: 0;
+}
+.tel{
+  background: url(../img/bgTel.png) left center no-repeat;
+  position: absolute;
+  top: 15px;
+  right: 0;
+  padding-left: 25px;
+  font-size: 25px;
+}
+.time{
+  border: 1px solid #d4d0d0;
+  position: absolute;
+  top: 70px;
+  right: 0;
+  width: 200px;
+  font-size: 10px;
+  padding: 5px;
+}
+.navi{
+  width: 900px;
+  position: absolute;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  border: 2px solid #d4d0d0;
+  border-radius: 10px;
+  background-color: #efaa75;
+  line-height: 70px;
+}
+header ul{
+  height: 70px;
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+header li{
+  float: left;
+  width: 20%;
+  height: 70px;
+}
+header a{
+  text-decoration: none;
+  color: #f1eeee;
+}
+.titleJa{
+  display: block;
+  height: 30px;
+  line-height: 30px;
+}
+.titleEn{
+  display: block;
+  height: 25px;
+  line-height: 25px;
+}
+.contentsWrapper{
+  width: 900px;
+  margin: 0 auto;
+  text-align: left;
+}
+#main{
+  float: right;
+  width: 640px;
+}
+#menu{
+  float: left;
+  width: 260px;
+}
+.clearFix::after{
+  content: "";
+  display: block;
+  clear: both;
+}
+.footerWrapper{
+  margin: 0 auto;
+  padding: 0;
+  width: 900px;
+  height: 100px;
+}
+#footer{
+ margin: 0;
+ padding: 0;
+}
+#footerMenu{
+  width: 900px;
+}
+#footerMenu li{
+  margin-right: 30px;
+  float: left;
+}
+.footerAddress{
+  text-align: right;
+  margin: 0;
+  padding: 0;
+}
+
