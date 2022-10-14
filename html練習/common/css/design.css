@@ -1,0 +1,793 @@
+/* CSS Document */
+/*-----------------------------------------------------------
+ フォントサイズの指定はYUI Fontsに基づき
+ 下記テーブルで指定します
+ |px|%|
+ |10|77|
+ |11|85|
+ |12|93|
+ |13|100|
+ |14|108|
+ |15|116|
+ |16|123.1|
+ |17|131|
+ |18|138.5|
+ |19|146.5|
+ |20|153.9|
+ |21|161.6|
+ |22|167|
+ |23|174|
+ |24|182|
+ |25|189|
+ |26|197|
+ ex) 12px
+ element {
+ 	font-size: 93%;
+ }
+ ------------------------------------------------------------*/
+ body {
+	margin:0 auto;
+	padding:0px 0 0 ;
+	text-align:center;
+	background:#F6F6F6;
+	color:#515151;
+	font-family:Verdana,Arial,Helvetica,'meirio','メイリオ','Hiragino Maru Gothic Pro','ヒラギノ丸ゴ Pro W4',Osaka,'ＭＳ Ｐゴシック',sans-serif;
+}
+
+a:link,a:visited {
+	color:#4D82C4;
+}
+
+a:hover,a:active {
+	color:#CC4866;
+}
+
+blockquote {
+	margin:1em 0px;
+	padding:15px;
+	border:#EFEED5 solid 3px;
+}
+
+hr {
+   border-width: 2px 0px 0px 0px;
+   border:solid #6CC6C4 2px;
+}
+
+img {
+  max-width: 100%;
+  height: auto;
+}
+
+/*外枠設定=====================================*/
+#wrapper {
+	margin:0;
+	padding:0;
+	border-top:solid 8px #6CC6C4;
+}
+
+#headerWrapper {
+	margin:0 auto 20px;
+	width:920px;
+	text-align:left;
+}
+
+/*ヘッダー設定=================================*/
+#header {
+	height:200px;
+	position:relative;
+}
+
+/*サイトタイトル*/
+.siteTitle {
+	position:absolute;
+	top:50px;
+	left:0px;
+	font-weight:normal;
+	margin:0;
+	padding:0;
+}
+
+/*概要*/
+.description {
+	position:absolute;
+	top:10px;
+	right:0px;
+	margin:0;
+	padding:0;
+	font-size:77%;
+	text-align:right;
+}
+
+.headerAddress {
+	position:absolute;
+	right:0;
+	top:35px;
+	height:75px;
+	width:220px;
+}
+
+.headerAddress .tel {
+	background:url(../images/bgTel.png) left center no-repeat;
+	margin:0;
+	padding:0 0 0 25px;
+	text-align:right;
+	font-size:197%;
+}
+
+.headerAddress .time {
+	border:solid 1px #D6D6D6;
+	padding:5px 0;
+	text-align:center;
+	margin:0;
+	position:absolute;
+	bottom:0;
+	width:220px;
+	font-size:77%;
+}
+
+.headerAddress .hot {
+	color:#B22C00;
+}
+
+/*グローバルナビゲーション*/
+.navi {
+	position:absolute;
+	bottom:0px;
+	left:0px;
+	border:solid 1px #6CC6C4;
+	height:70px;
+	width:919px;
+	background-image:-moz-linear-gradient(50% -1%,rgb(156,227,225) 0%,rgb(108,198,196) 100%); 
+	background-image:-webkit-gradient(linear,50% -1%,50% 101%,color-stop(0, rgb(156,227,225)),color-stop(1, rgb(108,198,196)));
+	background-image:-webkit-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-o-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-ms-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0)";
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0);
+	line-height:70px;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	behavior:url("border-radius.htc");
+}
+
+.navi ul {
+	list-style:none;
+	margin:0;
+	padding:0;
+	height:70px;
+}
+
+.navi ul li{
+	list-style:none;
+	margin:0;
+	padding:0;
+	float:left;
+	height:70px;
+}
+
+.navi ul li a{
+	text-decoration:none;
+	padding:17px 0px 18px;
+	width:182px;
+	display:block;
+	text-shadow: 1px 1px 2px #6CC6C4; /*CSS3*/
+	-moz-text-shadow: 1px 1px 2px #6CC6C4; /* Firefox用*/
+	-webkit-text-shadow: 1px 1px 2px #6CC6C4; /* Google Chrome, Safari用*/
+}
+
+.navi ul li a .titleJa {
+	display:block;
+	height:20px;
+	line-height:20px;
+	text-align:center;
+	font-size:108%;
+	font-weight:bold;
+}
+
+.navi ul li a .titleEn {
+	display:block;
+	height:15px;
+	line-height:15px;
+	text-align:center;
+	font-size:77%;
+	font-weight:bold;
+}
+
+.navi ul li a:link,
+.navi ul li a:visited{
+	border-right:#71C9C7 solid 1px;
+	border-left:#99E1DF solid 1px;
+}
+
+.navi ul li a.last:link,
+.navi ul li a.last:visited{
+	border-right:none;
+}
+
+.navi ul li a:link .titleJa,
+.navi ul li a:visited .titleJa{
+	color:#FFFFFF;
+}
+
+.navi ul li a:link .titleEn,
+.navi ul li a:visited .titleEn{
+	color:#FFFFFF;
+}
+
+.navi ul li a:hover,
+.navi ul li a:active{
+	background-image:-moz-linear-gradient(50% -1%,rgb(108,198,196) 0%,rgb(156,227,225) 100%); 
+	background-image:-webkit-gradient(linear,50% -1%,50% 101%,color-stop(0, rgb(108,198,196)),color-stop(1, rgb(156,227,225)));
+	background-image:-webkit-linear-gradient(rgb(108,198,196) 0%,rgb(156,227,225) 100%);
+	background-image:-o-linear-gradient(rgb(108,198,196) 0%,rgb(156,227,225) 100%);
+	background-image:-ms-linear-gradient(rgb(108,198,196) 0%,rgb(156,227,225) 100%);
+	background-image:linear-gradient(rgb(108,198,196) 0%,rgb(156,227,225) 100%);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff6cc6c4,endColorstr=#ff9ce3e1,GradientType=0)";
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff6cc6c4,endColorstr=#ff9ce3e1,GradientType=0);
+	text-shadow: 1px 1px 2px #6CC6C4; /*CSS3*/
+	-moz-text-shadow: 1px 1px 2px #6CC6C4; /* Firefox用*/
+	-webkit-text-shadow: 1px 1px 2px #6CC6C4; /* Google Chrome, Safari用*/
+}
+
+.navi ul li a.first {
+	-moz-border-radius:6px 0px 0px 6px;
+	-webkit-border-radius:6px 0px 0px 6px;
+	border-radius:6px 0px 0px 6px;
+	behavior:url("border-radius.htc");
+}
+
+.navi ul li a.last {
+	-moz-border-radius:0px 6px 6px 0px;
+	-webkit-border-radius:0px 6px 6px 0px;
+	border-radius:0px 6px 6px 0px;
+	behavior:url("border-radius.htc");
+}
+
+.navi ul li a:hover .titleJa,
+.navi ul li a:active .titleJa{
+	color:#C1FFFD;
+}
+
+.navi ul li a:hover .titleEn,
+.navi ul li a:active .titleEn{
+	color:#C1FFFD;
+}
+
+
+/*メインエリア設定=====================================*/
+
+#contentsWrapper {
+	margin:0 auto;
+	width:920px;
+	text-align:left;
+}
+
+#contents {
+
+}
+
+/*フッター設定=====================================*/
+
+#footerWrapper {
+	margin:20px 0 0;
+	text-align:center;
+	height:130px;
+}
+
+#footer {
+	width:920px;
+	text-align:left;
+	margin:0 auto;
+	padding:0;
+}
+
+#footerMenu ul {
+	margin:0;
+	padding:0 0 0 15px;
+	height:30px;
+	list-style:none;
+	background:#6CC6C4;
+	-moz-border-radius:6px;
+	-webkit-border-radius:6px;
+	border-radius:6px;
+	behavior:url("border-radius.htc");
+}
+
+#footerMenu ul li{
+	margin:0;
+	padding:0 20px 0 25px;
+	list-style:none;
+	float:left;
+	height:30px;
+	line-height:30px;
+	background:url(../images/bgFooterIcon.png) left center no-repeat;
+}
+
+#footerMenu ul a{
+	height:30px;
+	line-height:30px;
+	color:#FFF;
+	text-decoration:none;
+}
+
+#footerMenu ul a:hover{
+	text-decoration:underline;
+}
+
+.footerAddress {
+	text-align:right;
+	height:50px;
+	line-height:50px;
+}
+	
+#footer .copyright {
+	margin:0;
+	padding:10px 0 ;
+	text-align:center;
+	font-size:93%;
+	border-top:solid 2px #6CC6C4;
+}
+
+/*共通設定=====================================*/
+
+/*パンくずリスト*/
+.panList {
+	height:15px;
+	line-height:15px;
+	font-size:77%;
+	padding:5px;
+	margin:-10px 0 10px;
+}
+
+.panList a{
+}
+
+#main h3 {
+	color:#6CC6C4;
+}
+
+.pageTitle {
+	margin:0 0 0px;
+	padding:20px 0 20px 20px;
+	height:60px;
+	line-height:60px;
+	background-image:-moz-linear-gradient(50% -1%,rgb(156,227,225) 0%,rgb(108,198,196) 100%); 
+	background-image:-webkit-gradient(linear,50% -1%,50% 101%,color-stop(0, rgb(156,227,225)),color-stop(1, rgb(108,198,196)));
+	background-image:-webkit-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-o-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-ms-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0)";
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0);	line-height:70px;
+	border:solid 1px #6CC6C4;
+	color:#fff;
+	-moz-border-radius:6px 6px 0px 0px;
+	-webkit-border-radius:6px 6px 0px 0px;
+	border-radius:6px 6px 0px 0px;
+	behavior:url("border-radius.htc");
+}
+
+
+.subMidashi {
+	height:50px;
+	padding:0;
+	margin:0 0 15px;
+	font-size:123.1%;
+	border-bottom:solid 3px #6CC6C4;
+	color:#515151 !important;
+}
+
+.subMidashi .midashiText{
+	display:block;
+	line-height:50px;
+	padding:0 0 0 0px;
+}
+
+.textBox {
+	padding:10px;
+}
+
+#main {
+	float:right;
+	width:640px;
+}
+
+#main .inner {
+	background:#ffffff;
+	padding:20px;
+	-moz-border-radius: 0px 0px 6px 6px;
+	-webkit-border-radius: 0px 0px 6px 6px;
+	border-radius: 0px 0px 6px 6px;
+	behavior:url("border-radius.htc");
+}
+
+
+#menu {
+	float:left;
+	width:260px;
+}
+
+#menu .menuTitle01 {
+	margin:0;
+	padding:0 15px;
+	color:#fff;
+	background-image:-moz-linear-gradient(50% -1%,rgb(156,227,225) 0%,rgb(108,198,196) 100%); 
+	background-image:-webkit-gradient(linear,50% -1%,50% 101%,color-stop(0, rgb(156,227,225)),color-stop(1, rgb(108,198,196)));
+	background-image:-webkit-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-o-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-ms-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0)";
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0);
+	font-size:123.1%;
+	height:40px;
+	line-height:40px;
+	-moz-border-radius:6px 6px 0px 0px;
+	-webkit-border-radius:6px 6px 0px 0px;
+	border-radius:6px 6px 0px 0px;
+	behavior:url("border-radius.htc");
+	border-style:solid;
+	border-width:1px;
+	border-color:#6CC6C4;
+}
+
+#menu .menuList01  {
+	border-style:solid;
+	border-width:1px;
+	border-color:#6CC6C4;
+	background-color:#ffffff;
+	list-style:none;
+	margin:0 0 20px;
+}
+
+#menu .menuList01 ul {
+	margin:0 0 20px;
+	padding:0;
+}
+
+#menu .menuList01 ul li {
+	margin:0px 12px;
+	padding:0 0 0 25px;
+	list-style:none;
+	border-bottom:#6CC6C4 solid 1px;
+	background:url(../images/bgListIcon01.png) no-repeat 5px center;
+}
+
+#menu .menuList01 ul li a {
+	text-decoration:none;
+	color:#595959;
+	font-size:108%;
+	padding:8px 0;
+	display:block;
+	font-weight:bold;
+}
+
+#menu .menuList01 ul li a:hover,
+#menu .menuList01 ul li a:active {
+	color:#6CC6C4;
+}
+
+
+#menu .menuTitle02 {
+	margin:0;
+	padding:0 15px;
+	color:#fff;
+	background-image:-moz-linear-gradient(50% -1%,rgb(156,227,225) 0%,rgb(108,198,196) 100%); 
+	background-image:-webkit-gradient(linear,50% -1%,50% 101%,color-stop(0, rgb(156,227,225)),color-stop(1, rgb(108,198,196)));
+	background-image:-webkit-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-o-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:-ms-linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	background-image:linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+	-ms-filter:"progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0)";
+	filter:progid:DXImageTransform.Microsoft.gradient(startColorstr=#ff9ce3e1,endColorstr=#ff6cc6c4,GradientType=0);
+	font-size:123.1%;
+	height:40px;
+	line-height:40px;
+	-moz-border-radius:6px 6px 0px 0px;
+	-webkit-border-radius:6px 6px 0px 0px;
+	border-radius:6px 6px 0px 0px;
+	behavior:url("border-radius.htc");
+	border-style:solid;
+	border-width:1px;
+	border-color:#6CC6C4;
+}
+
+#menu .menuList02  {
+	border-style:solid;
+	border-width:1px;
+	border-color:#6CC6C4;
+	background-color:#fff;
+	list-style:none;
+	margin:0 0 20px;
+}
+
+#menu .menuList02 ul {
+	margin:0 0 20px;
+	padding:0;
+}
+
+#menu .menuList02 ul li {
+	margin:0px 12px;
+	padding:0 0 0 25px;
+	list-style:none;
+	border-bottom:#6CC6C4 solid 1px;
+	background:url(../images/bgListIcon01.png) no-repeat 5px center;
+}
+
+#menu .menuList02 ul li a {
+	text-decoration:none;
+	color:#595959;
+	font-size:108%;
+	padding:8px 0;
+	display:block;
+	font-weight:bold;
+}
+
+#menu .menuList02 ul li a:hover,
+#menu .menuList02 ul li a:active {
+	color:#AEC24C;
+}
+
+/*トップページ=====================================*/
+
+.news dl {
+	margin: 0 0 15px;
+	padding: 0 10px 10px;
+}
+
+.news dl dt {
+	float: left;
+	width: 11em;
+	padding: 10px 0;
+	font-weight: bold;
+	line-height: 150%;
+	margin:0;
+}
+.news dl dd {
+	margin:0;
+	padding: 10px 10px 10px 11em;
+	line-height: 150%;
+	border-bottom: 1px #CCCCCC dotted;
+}
+
+/*医院紹介ページ=====================================*/
+
+.companyTable table {
+	border-top:solid #999 1px;
+	border-left:solid #999 1px;
+	width:100%;
+	border-spacing: 0;
+	margin:0 0 20px;
+}
+
+.companyTable table th{
+	border-bottom:solid #999 1px;
+	border-right:solid #999 1px;
+	text-align:left;
+	background:#D1D1D1;
+	padding:10px;
+	text-align:center;
+}
+
+.companyTable table td{
+	border-bottom:solid #999 1px;
+	border-right:solid #999 1px;
+	padding:10px;
+	text-align:center;
+}
+
+/*スタッフ紹介ページ=====================================*/
+
+.doctorItem {
+	margin:0 0 30px;
+}
+
+.doctorItem .doctorPhoto {
+	float:left;
+	width:200px;
+}
+.doctorItem .doctorPhoto p {
+	margin:0 0 10px;
+	padding:0;
+}
+	
+.doctorItem .doctorPhoto .name {
+	text-align:center;
+	background:#6CC6C4;
+	color:#FFF;
+}
+
+.doctorItem .doctorPhoto img {
+	width:200px;
+}
+
+.doctorItem .doctorProfile {
+	width:380px;
+	float:right;
+}
+
+/*アクセスページ=====================================*/
+
+.companyMap {
+}
+
+.companyPhoto {
+	width:200px;
+	float:left;
+}
+
+.companyPhoto img {
+	width:200px;
+}
+
+.companyAddress {
+	width:380px;
+	float:right;
+}
+
+.liquid {
+  position: relative;
+  width: 100%;
+  padding-top: 58.33%; /* 高さ ÷ 横幅 × 100 */
+}
+.liquid iframe {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+}
+
+@media screen and (max-width:768px) {
+	*,
+	*::before,
+	*::after {
+	  box-sizing: border-box;
+	}
+
+	#headerWrapper,
+	#contentsWrapper,
+	#footer {
+		width : 100%;
+	}
+
+	#header {
+		height: auto;
+	}
+
+	.siteTitle {
+		position: static;
+		text-align: center;
+	}
+	.siteTitle img {
+		vertical-align: bottom;
+	}
+	.description {
+		position: static;
+		text-align: center;
+	}
+	.headerAddress {
+		position: static;
+		width: 220px;
+		max-width: 100%;
+		height: auto;
+		margin-left: auto;
+		margin-right: auto;
+	}
+	.headerAddress .time {
+		position: static;
+	}
+	.navi {
+		position: static;
+		width: 100%;
+		background: none;
+		border-radius: 0;
+		border: none;
+		margin: 12px 0;
+		height: auto;
+	}
+	.navi ul {
+		height: auto;
+	}
+	.navi ul::after {
+		content: "";
+		display: block;
+		clear: both;
+	}
+	.navi ul li {
+		width: 50%;
+		background-image: linear-gradient(rgb(156,227,225) 0%,rgb(108,198,196) 100%);
+		border-radius: 6px;
+	}
+	.navi ul li a {
+		width: 100%;
+	}
+
+	#main,
+	#menu {
+		float: none;
+		width: 100%;
+		padding: 0 12px;
+	}
+	#main {
+		margin-bottom: 3em;
+	}
+	#footerMenu {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	#footerMenu ul {
+		height: auto;
+		margin-bottom: 1em;
+	}
+	#footerMenu ul::after {
+		display: block;
+		clear: both;
+		content: "";
+	}
+	.footerAddress {
+		height: auto;
+		line-height: 1.6;
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+	.footerAddress > * {
+		display: block;
+	}
+	#footer .copyright {
+		padding-left: 12px;
+		padding-right: 12px;
+	}
+
+	/* index */
+	.news dl {
+		padding: 0;
+	}
+	.news dl dt {
+		float: none;
+		width: 100%;
+	}
+	.news dl dd {
+		float: none;
+		width: 100%;
+		padding-left: 10px;
+	}
+
+	/* clinic */
+	.panList {
+		margin-bottom: .4em;
+		height: auto;
+		line-height: 1.6;
+	}
+	.pageTitle {
+		height: auto;
+		line-height: 1.6;
+		padding-top: 12px;
+		padding-bottom: 12px;
+	}
+
+	/* staff */
+	.doctorItem .doctorPhoto {
+		float: none;
+		width: 100%;
+		text-align: center;
+	}
+	.doctorItem .doctorProfile  {
+		float: none;
+		width: 100%;
+	}
+
+	/* access */
+	.companyPhoto {
+		width: 100%;
+		float: none;
+		text-align: center;
+	}
+	.companyAddress {
+		width: 100%;
+		float: none;
+	}
+
+}

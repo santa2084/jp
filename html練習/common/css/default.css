@@ -1,0 +1,32 @@
+@charset "utf-8";
+/* CSS Document */
+* {
+	line-height:180%;
+	word-break: break-all;
+}
+
+img {
+	border:none;
+	-ms-interpolation-mode: bicubic;
+} 
+
+.clearFix {
+	zoom:100%;
+}
+
+.clearFix:after {
+	content: " "; clear: both; height: 0; display: block; visibility: hidden;
+}
+
+.textRight {
+	text-align:right;
+}
+
+.textCenter {
+	text-align:center;
+}
+
+.textLeft {
+	text-align:left;
+}
+
