@@ -1,0 +1,1013 @@
+<!DOCTYPE html>
+<!-- saved from url=(0037)https://manablog.org/solidity-faucet/ -->
+<html lang="ja"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<link rel="stylesheet" href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/style.css" type="text/css">
+
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"></script>
+
+<meta name="viewport" content="width=device-width, initial-scale=1">
+
+
+
+<!-- OGP設定 -->
+<meta property="fb:app_id" content="672976592720249">
+<meta property="fb:admins" content="100001538665676">
+<meta name="twitter:card" value="summary_large_image">
+<meta name="twitter:site" value="@manabubannai">
+<meta name="twitter:creator" value="@manabubannai">
+<meta name="twitter:title" value="Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】">
+<meta name="twitter:description" value="Solidityで「Faucetアプリ」を作る方法を解説します。まずはトークンとFaucet用のスマートコントラクトを実装して、その後に「スマートコントラクト」と「フロントエンド」を繋ぎます。フロントエンドの接続では「Web3.js」と「メタマスク」を使います。Solidityの基礎解説です。">
+
+<meta property="og:url" content="https://manablog.org/solidity-faucet/">
+<meta property="og:title" content="Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】">
+<meta property="og:description" content="Solidityで「Faucetアプリ」を作る方法を解説します。まずはトークンとFaucet用のスマートコントラクトを実装して、その後に「スマートコントラクト」と「フロントエンド」を繋ぎます。フロントエンドの接続では「Web3.js」と「メタマスク」を使います。Solidityの基礎解説です。">
+<meta property="og:type" content="article">
+<meta property="og:image" content="https://manablog.org/wp-content/uploads/2022/02/shutterstock_2090525866-1.jpg">
+<meta name="twitter:image" value="https://manablog.org/wp-content/uploads/2022/02/shutterstock_2090525866-1.jpg">
+
+<!-- /OGP設定 -->
+
+<link rel="shortcut icon" href="https://manablog.org/wp-content/themes/manabu/images/favicon.ico">
+
+<!-- schema.org -->
+<meta itemprop="name" content="Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】">
+<meta itemprop="description" content="https://manablog.org/solidity-faucet/">
+
+
+		<!-- All in One SEO 4.2.6.1 - aioseo.com -->
+		<title>Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】</title>
+		<meta name="description" content="Solidityで「Faucetアプリ」を作る方法を解説します。まずはトークンとFaucet用のスマートコントラクトを実装して、その後に「スマートコントラクト」と「フロントエンド」を繋ぎます。フロントエンドの接続では「Web3.js」と「メタマスク」を使います。Solidityの基礎解説です。">
+		<meta name="robots" content="max-snippet:-1, max-image-preview:large, max-video-preview:-1">
+		<link rel="canonical" href="https://manablog.org/solidity-faucet/">
+		<meta name="generator" content="All in One SEO (AIOSEO) 4.2.6.1 ">
+		<meta name="google" content="nositelinkssearchbox">
+		<script type="text/javascript" async="" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/analytics.js"></script><script type="text/javascript" async="" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/js"></script><script type="application/ld+json" class="aioseo-schema">
+			{"@context":"https:\/\/schema.org","@graph":[{"@type":"Article","@id":"https:\/\/manablog.org\/solidity-faucet\/#article","name":"Solidity\u3067\u300cFaucet\u30a2\u30d7\u30ea\u300d\u3092\u4f5c\u308b\u65b9\u6cd5\u3010Web3.js\u3067\u30e1\u30bf\u30de\u30b9\u30af\u3068\u9023\u643a\u3011","headline":"Solidity\u3067\u300cFaucet\u30a2\u30d7\u30ea\u300d\u3092\u4f5c\u308b\u65b9\u6cd5\u3010Web3.js\u3067\u30e1\u30bf\u30de\u30b9\u30af\u3068\u9023\u643a\u3011","author":{"@id":"https:\/\/manablog.org\/author\/manablog\/#author"},"publisher":{"@id":"https:\/\/manablog.org\/#person"},"image":{"@type":"ImageObject","url":"https:\/\/manablog.org\/wp-content\/uploads\/2022\/02\/shutterstock_2090525866-1.jpg","width":1500,"height":932,"caption":"Idea to make money, earning or profit from business creativity, financial advise to gain more wealth or success rich investor concept, businessman open lightbulb idea faucet to earn money coins."},"datePublished":"2022-02-01T04:50:31+09:00","dateModified":"2022-02-01T04:50:31+09:00","inLanguage":"ja","mainEntityOfPage":{"@id":"https:\/\/manablog.org\/solidity-faucet\/#webpage"},"isPartOf":{"@id":"https:\/\/manablog.org\/solidity-faucet\/#webpage"},"articleSection":"PROGRAMMING, PROGRAMMING"},{"@type":"BreadcrumbList","@id":"https:\/\/manablog.org\/solidity-faucet\/#breadcrumblist","itemListElement":[{"@type":"ListItem","@id":"https:\/\/manablog.org\/#listItem","position":1,"item":{"@type":"WebPage","@id":"https:\/\/manablog.org\/","name":"\u30db\u30fc\u30e0","description":"IT\u306e\u6280\u8853\u60c5\u5831\u3092\u4e2d\u5fc3\u306b\u3001Web Marketing\uff08\u7279\u306bSEO\uff09\u60c5\u5831\u3084\u65c5\u884c\u60c5\u5831\u306a\u3069\u5e45\u5e83\u304f\u767a\u4fe1\u4e2d\u3002\u4eba\u751f\u3067\u5f97\u305f\u30b9\u30ad\u30eb\u3084\u77e5\u8b58\u306e\u30a2\u30a6\u30c8\u30d7\u30c3\u30c8\u30d6\u30ed\u30b0\u3067\u3059\u3002","url":"https:\/\/manablog.org\/"},"nextItem":"https:\/\/manablog.org\/solidity-faucet\/#listItem"},{"@type":"ListItem","@id":"https:\/\/manablog.org\/solidity-faucet\/#listItem","position":2,"item":{"@type":"WebPage","@id":"https:\/\/manablog.org\/solidity-faucet\/","name":"Solidity\u3067\u300cFaucet\u30a2\u30d7\u30ea\u300d\u3092\u4f5c\u308b\u65b9\u6cd5\u3010Web3.js\u3067\u30e1\u30bf\u30de\u30b9\u30af\u3068\u9023\u643a\u3011","description":"Solidity\u3067\u300cFaucet\u30a2\u30d7\u30ea\u300d\u3092\u4f5c\u308b\u65b9\u6cd5\u3092\u89e3\u8aac\u3057\u307e\u3059\u3002\u307e\u305a\u306f\u30c8\u30fc\u30af\u30f3\u3068Faucet\u7528\u306e\u30b9\u30de\u30fc\u30c8\u30b3\u30f3\u30c8\u30e9\u30af\u30c8\u3092\u5b9f\u88c5\u3057\u3066\u3001\u305d\u306e\u5f8c\u306b\u300c\u30b9\u30de\u30fc\u30c8\u30b3\u30f3\u30c8\u30e9\u30af\u30c8\u300d\u3068\u300c\u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u300d\u3092\u7e4b\u304e\u307e\u3059\u3002\u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u306e\u63a5\u7d9a\u3067\u306f\u300cWeb3.js\u300d\u3068\u300c\u30e1\u30bf\u30de\u30b9\u30af\u300d\u3092\u4f7f\u3044\u307e\u3059\u3002Solidity\u306e\u57fa\u790e\u89e3\u8aac\u3067\u3059\u3002","url":"https:\/\/manablog.org\/solidity-faucet\/"},"previousItem":"https:\/\/manablog.org\/#listItem"}]},{"@type":"Person","@id":"https:\/\/manablog.org\/#person","name":"Manabu Bannai","image":{"@type":"ImageObject","@id":"https:\/\/manablog.org\/solidity-faucet\/#personImage","url":"https:\/\/secure.gravatar.com\/avatar\/cd46b48aaf3b5f129bff00b45022efde?s=96&d=mm&r=g","width":96,"height":96,"caption":"Manabu Bannai"}},{"@type":"WebPage","@id":"https:\/\/manablog.org\/solidity-faucet\/#webpage","url":"https:\/\/manablog.org\/solidity-faucet\/","name":"Solidity\u3067\u300cFaucet\u30a2\u30d7\u30ea\u300d\u3092\u4f5c\u308b\u65b9\u6cd5\u3010Web3.js\u3067\u30e1\u30bf\u30de\u30b9\u30af\u3068\u9023\u643a\u3011","description":"Solidity\u3067\u300cFaucet\u30a2\u30d7\u30ea\u300d\u3092\u4f5c\u308b\u65b9\u6cd5\u3092\u89e3\u8aac\u3057\u307e\u3059\u3002\u307e\u305a\u306f\u30c8\u30fc\u30af\u30f3\u3068Faucet\u7528\u306e\u30b9\u30de\u30fc\u30c8\u30b3\u30f3\u30c8\u30e9\u30af\u30c8\u3092\u5b9f\u88c5\u3057\u3066\u3001\u305d\u306e\u5f8c\u306b\u300c\u30b9\u30de\u30fc\u30c8\u30b3\u30f3\u30c8\u30e9\u30af\u30c8\u300d\u3068\u300c\u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u300d\u3092\u7e4b\u304e\u307e\u3059\u3002\u30d5\u30ed\u30f3\u30c8\u30a8\u30f3\u30c9\u306e\u63a5\u7d9a\u3067\u306f\u300cWeb3.js\u300d\u3068\u300c\u30e1\u30bf\u30de\u30b9\u30af\u300d\u3092\u4f7f\u3044\u307e\u3059\u3002Solidity\u306e\u57fa\u790e\u89e3\u8aac\u3067\u3059\u3002","inLanguage":"ja","isPartOf":{"@id":"https:\/\/manablog.org\/#website"},"breadcrumb":{"@id":"https:\/\/manablog.org\/solidity-faucet\/#breadcrumblist"},"author":"https:\/\/manablog.org\/author\/manablog\/#author","creator":"https:\/\/manablog.org\/author\/manablog\/#author","image":{"@type":"ImageObject","url":"https:\/\/manablog.org\/wp-content\/uploads\/2022\/02\/shutterstock_2090525866-1.jpg","@id":"https:\/\/manablog.org\/#mainImage","width":1500,"height":932,"caption":"Idea to make money, earning or profit from business creativity, financial advise to gain more wealth or success rich investor concept, businessman open lightbulb idea faucet to earn money coins."},"primaryImageOfPage":{"@id":"https:\/\/manablog.org\/solidity-faucet\/#mainImage"},"datePublished":"2022-02-01T04:50:31+09:00","dateModified":"2022-03-18T04:34:11+09:00"},{"@type":"WebSite","@id":"https:\/\/manablog.org\/#website","url":"https:\/\/manablog.org\/","name":"manablog\uff08\u30de\u30ca\u30d6\u30ed\u30b0\uff09","inLanguage":"ja","publisher":{"@id":"https:\/\/manablog.org\/#person"}}]}
+		</script>
+		<!-- All in One SEO -->
+
+<link rel="dns-prefetch" href="https://js.stripe.com/">
+<link rel="dns-prefetch" href="https://checkout.stripe.com/">
+<link rel="stylesheet" id="wp-block-library-css" href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/style.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="classic-theme-styles-css" href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/classic-themes.min.css" type="text/css" media="all">
+<style id="global-styles-inline-css" type="text/css">
+body{--wp--preset--color--black: #000000;--wp--preset--color--cyan-bluish-gray: #abb8c3;--wp--preset--color--white: #ffffff;--wp--preset--color--pale-pink: #f78da7;--wp--preset--color--vivid-red: #cf2e2e;--wp--preset--color--luminous-vivid-orange: #ff6900;--wp--preset--color--luminous-vivid-amber: #fcb900;--wp--preset--color--light-green-cyan: #7bdcb5;--wp--preset--color--vivid-green-cyan: #00d084;--wp--preset--color--pale-cyan-blue: #8ed1fc;--wp--preset--color--vivid-cyan-blue: #0693e3;--wp--preset--color--vivid-purple: #9b51e0;--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple: linear-gradient(135deg,rgba(6,147,227,1) 0%,rgb(155,81,224) 100%);--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan: linear-gradient(135deg,rgb(122,220,180) 0%,rgb(0,208,130) 100%);--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange: linear-gradient(135deg,rgba(252,185,0,1) 0%,rgba(255,105,0,1) 100%);--wp--preset--gradient--luminous-vivid-orange-to-vivid-red: linear-gradient(135deg,rgba(255,105,0,1) 0%,rgb(207,46,46) 100%);--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray: linear-gradient(135deg,rgb(238,238,238) 0%,rgb(169,184,195) 100%);--wp--preset--gradient--cool-to-warm-spectrum: linear-gradient(135deg,rgb(74,234,220) 0%,rgb(151,120,209) 20%,rgb(207,42,186) 40%,rgb(238,44,130) 60%,rgb(251,105,98) 80%,rgb(254,248,76) 100%);--wp--preset--gradient--blush-light-purple: linear-gradient(135deg,rgb(255,206,236) 0%,rgb(152,150,240) 100%);--wp--preset--gradient--blush-bordeaux: linear-gradient(135deg,rgb(254,205,165) 0%,rgb(254,45,45) 50%,rgb(107,0,62) 100%);--wp--preset--gradient--luminous-dusk: linear-gradient(135deg,rgb(255,203,112) 0%,rgb(199,81,192) 50%,rgb(65,88,208) 100%);--wp--preset--gradient--pale-ocean: linear-gradient(135deg,rgb(255,245,203) 0%,rgb(182,227,212) 50%,rgb(51,167,181) 100%);--wp--preset--gradient--electric-grass: linear-gradient(135deg,rgb(202,248,128) 0%,rgb(113,206,126) 100%);--wp--preset--gradient--midnight: linear-gradient(135deg,rgb(2,3,129) 0%,rgb(40,116,252) 100%);--wp--preset--duotone--dark-grayscale: url('#wp-duotone-dark-grayscale');--wp--preset--duotone--grayscale: url('#wp-duotone-grayscale');--wp--preset--duotone--purple-yellow: url('#wp-duotone-purple-yellow');--wp--preset--duotone--blue-red: url('#wp-duotone-blue-red');--wp--preset--duotone--midnight: url('#wp-duotone-midnight');--wp--preset--duotone--magenta-yellow: url('#wp-duotone-magenta-yellow');--wp--preset--duotone--purple-green: url('#wp-duotone-purple-green');--wp--preset--duotone--blue-orange: url('#wp-duotone-blue-orange');--wp--preset--font-size--small: 13px;--wp--preset--font-size--medium: 20px;--wp--preset--font-size--large: 36px;--wp--preset--font-size--x-large: 42px;--wp--preset--spacing--20: 0.44rem;--wp--preset--spacing--30: 0.67rem;--wp--preset--spacing--40: 1rem;--wp--preset--spacing--50: 1.5rem;--wp--preset--spacing--60: 2.25rem;--wp--preset--spacing--70: 3.38rem;--wp--preset--spacing--80: 5.06rem;}:where(.is-layout-flex){gap: 0.5em;}body .is-layout-flow > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-flow > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-flow > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignleft{float: left;margin-inline-start: 0;margin-inline-end: 2em;}body .is-layout-constrained > .alignright{float: right;margin-inline-start: 2em;margin-inline-end: 0;}body .is-layout-constrained > .aligncenter{margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > :where(:not(.alignleft):not(.alignright):not(.alignfull)){max-width: var(--wp--style--global--content-size);margin-left: auto !important;margin-right: auto !important;}body .is-layout-constrained > .alignwide{max-width: var(--wp--style--global--wide-size);}body .is-layout-flex{display: flex;}body .is-layout-flex{flex-wrap: wrap;align-items: center;}body .is-layout-flex > *{margin: 0;}:where(.wp-block-columns.is-layout-flex){gap: 2em;}.has-black-color{color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-color{color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-color{color: var(--wp--preset--color--white) !important;}.has-pale-pink-color{color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-color{color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-color{color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-color{color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-color{color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-color{color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-color{color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-color{color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-color{color: var(--wp--preset--color--vivid-purple) !important;}.has-black-background-color{background-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-background-color{background-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-background-color{background-color: var(--wp--preset--color--white) !important;}.has-pale-pink-background-color{background-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-background-color{background-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-background-color{background-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-background-color{background-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-background-color{background-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-background-color{background-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-background-color{background-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-background-color{background-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-background-color{background-color: var(--wp--preset--color--vivid-purple) !important;}.has-black-border-color{border-color: var(--wp--preset--color--black) !important;}.has-cyan-bluish-gray-border-color{border-color: var(--wp--preset--color--cyan-bluish-gray) !important;}.has-white-border-color{border-color: var(--wp--preset--color--white) !important;}.has-pale-pink-border-color{border-color: var(--wp--preset--color--pale-pink) !important;}.has-vivid-red-border-color{border-color: var(--wp--preset--color--vivid-red) !important;}.has-luminous-vivid-orange-border-color{border-color: var(--wp--preset--color--luminous-vivid-orange) !important;}.has-luminous-vivid-amber-border-color{border-color: var(--wp--preset--color--luminous-vivid-amber) !important;}.has-light-green-cyan-border-color{border-color: var(--wp--preset--color--light-green-cyan) !important;}.has-vivid-green-cyan-border-color{border-color: var(--wp--preset--color--vivid-green-cyan) !important;}.has-pale-cyan-blue-border-color{border-color: var(--wp--preset--color--pale-cyan-blue) !important;}.has-vivid-cyan-blue-border-color{border-color: var(--wp--preset--color--vivid-cyan-blue) !important;}.has-vivid-purple-border-color{border-color: var(--wp--preset--color--vivid-purple) !important;}.has-vivid-cyan-blue-to-vivid-purple-gradient-background{background: var(--wp--preset--gradient--vivid-cyan-blue-to-vivid-purple) !important;}.has-light-green-cyan-to-vivid-green-cyan-gradient-background{background: var(--wp--preset--gradient--light-green-cyan-to-vivid-green-cyan) !important;}.has-luminous-vivid-amber-to-luminous-vivid-orange-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-amber-to-luminous-vivid-orange) !important;}.has-luminous-vivid-orange-to-vivid-red-gradient-background{background: var(--wp--preset--gradient--luminous-vivid-orange-to-vivid-red) !important;}.has-very-light-gray-to-cyan-bluish-gray-gradient-background{background: var(--wp--preset--gradient--very-light-gray-to-cyan-bluish-gray) !important;}.has-cool-to-warm-spectrum-gradient-background{background: var(--wp--preset--gradient--cool-to-warm-spectrum) !important;}.has-blush-light-purple-gradient-background{background: var(--wp--preset--gradient--blush-light-purple) !important;}.has-blush-bordeaux-gradient-background{background: var(--wp--preset--gradient--blush-bordeaux) !important;}.has-luminous-dusk-gradient-background{background: var(--wp--preset--gradient--luminous-dusk) !important;}.has-pale-ocean-gradient-background{background: var(--wp--preset--gradient--pale-ocean) !important;}.has-electric-grass-gradient-background{background: var(--wp--preset--gradient--electric-grass) !important;}.has-midnight-gradient-background{background: var(--wp--preset--gradient--midnight) !important;}.has-small-font-size{font-size: var(--wp--preset--font-size--small) !important;}.has-medium-font-size{font-size: var(--wp--preset--font-size--medium) !important;}.has-large-font-size{font-size: var(--wp--preset--font-size--large) !important;}.has-x-large-font-size{font-size: var(--wp--preset--font-size--x-large) !important;}
+.wp-block-navigation a:where(:not(.wp-element-button)){color: inherit;}
+:where(.wp-block-columns.is-layout-flex){gap: 2em;}
+.wp-block-pullquote{font-size: 1.5em;line-height: 1.6;}
+</style>
+<link rel="stylesheet" id="stripe-checkout-button-css" href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/button.css" type="text/css" media="all">
+<link rel="stylesheet" id="simpay-public-css" href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/simpay-public.min.css" type="text/css" media="all">
+<link rel="stylesheet" id="simpay-public-pro-css" href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/simpay-public-pro.min.css" type="text/css" media="all">
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/jquery.min.js" id="jquery-core-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/jquery-migrate.min.js" id="jquery-migrate-js"></script>
+<script type="text/javascript" id="icwp-wpsf-shield-notbot-js-extra">
+/* <![CDATA[ */
+var shield_vars_notbotjs = {"ajax":{"not_bot":{"action":"icwp-wpsf","exec":"not_bot","exec_nonce":"2579517efd","mod_slug":"icwp-wpsf-ips","ajaxurl":"https:\/\/manablog.org\/wp-admin\/admin-ajax.php"}},"flags":{"run":true}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/notbot.js" id="icwp-wpsf-shield-notbot-js"></script>
+<link rel="https://api.w.org/" href="https://manablog.org/wp-json/"><link rel="alternate" type="application/json" href="https://manablog.org/wp-json/wp/v2/posts/28576"><meta name="generator" content="WordPress 6.1">
+<link rel="shortlink" href="https://manablog.org/?p=28576">
+<link rel="alternate" type="application/json+oembed" href="https://manablog.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmanablog.org%2Fsolidity-faucet%2F">
+<link rel="alternate" type="text/xml+oembed" href="https://manablog.org/wp-json/oembed/1.0/embed?url=https%3A%2F%2Fmanablog.org%2Fsolidity-faucet%2F&amp;format=xml">
+<meta name="viewport" content="width=device-width, minimum-scale=1">
+<script charset="utf-8" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/horizon_timeline.5b32f06df3f1186af2ebf11024b09726.js"></script><script charset="utf-8" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/tweet.495a42551da1e5c4c5171224e18a5a07.js"></script></head>
+<body>
+
+	<header itemscope="itemscope" itemtype="http://schema.org/WPHeader">
+		<div class="container">
+			<div class="row">
+	
+				<!-- スマホ用メニューボタン -->
+				<div class="sp">
+					<div class="close-btn">✖️</div>
+					<div class="menu-btn">☰</div>
+					<h1 class="sptitle">yuublog</h1>
+				</div>
+				
+	
+				<div class="col-xs-10 col-sm-2">
+									<h1 class="pctitle">yuublog</h1>
+										<a href="../index.html">
+														<!-- PC用 -->
+								<!-- <img src="/images/logo.png" alt="" class="logo"> -->
+												</a>
+									</h1>
+								</div>
+				<div class="col-xs-0 col-sm-10">
+					<p>ぽてっと</p>
+				</div>
+	
+			</div>
+		</div>
+	
+				<!-- PC用 -->
+			<div class="container-fluid nav-bg">
+				<div class="container">
+					<div class="row">
+						<!-- PC用 -->
+	<nav>
+	
+		<ul class="nav navbar-nav">
+			<li itemprop="name" class=""><a href="../../../../index.html" itemprop="url"><i class="fa fa-home" aria-hidden="true"></i></a></li>
+			<li itemprop="name" class="pc-none"><a href="../../../../about/index.html" itemprop="url"><i class="fa fa-home" aria-hidden="true"></i> プロフィール</a></li>
+			<li class="dropdown" itemprop="name">
+				<a href="#" itemprop="url" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-line-chart" aria-hidden="true"></i> SEO <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="../../../../seo/seo/index.html" class="drop">SEO</a></li>
+					<li><a href="../../../../seo/affiliate/index.html" class="drop">Affiliate</a></li>
+				</ul>
+			</li>
+			<li class="dropdown" itemprop="name">
+				<a href="#" itemprop="url" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-code" aria-hidden="true"></i> CODE <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="../../../../code/all/index.html" class="drop">ALL</a></li>
+					<li><a href="../../../../code/wordpress/index.html" class="drop">WordPress</a></li>
+					<li><a href="../../../../code/php/index.html" class="drop">PHP</a></li>
+					<li><a href="../../../../code/codelgniter/index.html" class="drop">Codeigniter</a></li>
+					<li><a href="../../../../code/laravel/index.html" class="drop">Laravel</a></li>
+					<li><a href="../../../../code/javascript/index.html" class="drop">JavaScript</a></li>
+					<li><a href="../../../../code/css/index.html" class="drop">CSS</a></li>
+				</ul>
+			</li>
+	
+			<li itemprop="name"><a href="../../../../crypt/index.html" itemprop="url" target="new"><i class="fa fa-btc" aria-hidden="true"></i> CRYPTO</a></li>
+	
+			<li class="dropdown" itemprop="name">
+				<a href="./index.html" itemprop="url" class="dropdown-toggle" data-toggle="dropdown" role="button" aria-haspopup="true" aria-expanded="false"><i class="fa fa-globe" aria-hidden="true"></i> LIFE <span class="caret"></span></a>
+				<ul class="dropdown-menu">
+					<li><a href="../../../../life/all/index.html" class="drop">ALL</a></li>
+					<li><a href="../../../../life/work/index.html" class="drop">Work</a></li>
+					<li><a href="../../../../life/blog/index.html" class="drop">Blog</a></li>
+					<li><a href="../../../../life/game/index.html" class="drop">Game</a></li>
+					<li><a href="../../../../life/freelance/index.html" class="drop">Freelance</a></li>
+					<li><a href="../../../../life/remote work/index.html" class="drop">Remote Work</a></li>
+				</ul>
+			</li>
+			<li itemprop="name"><a href="../../../../travel/index.html" itemprop="url"><i class="fa fa-plane" aria-hidden="true"></i> TRAVEL</a></li>
+			<li itemprop="name"><a href="../../../../thought/index.html" itemprop="url"><i class="fa fa-spinner" aria-hidden="true"></i> THOUGHT</a></li>
+			<li itemprop="name"><a href="../../../../party/index.html" itemprop="url"><i class="fa fa-glass" aria-hidden="true"></i> PARTY</a></li>
+		</ul>
+	</nav>
+	
+					</div>
+				</div>
+			</div>
+		
+	</header>
+
+<!-- Blogのメインコンテンツエリア -->
+<main id="main" itemprop="mainContentOfPage" itemscope="itemscope" itemtype="http://schema.org/Blog">
+	<div class="container">
+		<div class="row">
+
+			
+			<!-- articleタグのマークアップ -->
+			<article itemscope="itemscope" itemtype="http://schema.org/BlogPosting" itemprop="blogPost">
+				<section>
+					<!-- 本文の表示 -->
+
+												<div itemprop="articleBody" class="col-xs-12 col-sm-12 col-md-8">
+						
+
+
+<div class="col-xs-12 wrap single">
+
+	<p class="meta">
+	<time itemprop="datePublished">2022/02/01</time>
+			<time itemprop="dateModified">
+			(更新日: 2022/03/18)
+		</time>
+	</p>
+	<h1 itemprop="headline">Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】</h1>
+
+	<p class="cat"><a href="https://manablog.org/category/programming/" rel="category tag">PROGRAMMING</a></p>
+
+	<!-- サムネイルの表示 -->
+		<figure><div class="thumbnail">
+		<a href="https://manablog.org/solidity-faucet/" title="Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】">
+			<span itemprop="image">
+				<img width="1500" height="932" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/shutterstock_2090525866-1.jpg" class="img-responsive max-width wp-post-image" alt="" decoding="async" loading="lazy" itemprop="image" srcset="https://manablog.org/wp-content/uploads/2022/02/shutterstock_2090525866-1.jpg 1500w, https://manablog.org/wp-content/uploads/2022/02/shutterstock_2090525866-1-320x199.jpg 320w, https://manablog.org/wp-content/uploads/2022/02/shutterstock_2090525866-1-1024x636.jpg 1024w, https://manablog.org/wp-content/uploads/2022/02/shutterstock_2090525866-1-768x477.jpg 768w" sizes="(max-width: 1500px) 100vw, 1500px">				</span>
+		</a>
+	</div></figure>
+		<!-- /サムネイルの表示 -->
+
+		<style>.twitter-tweet{max-width: 750px!important;}</style>
+<p>こんにちは、yuudaiです。<br>
+今回は「Solidityで”Faucetアプリ”を作る方法」を解説します。</p>
+<!-- <p class="point"><i class="fa fa-check" aria-hidden="true"></i> 実際に開発したアプリがこちら</p>
+<div class="twitter-tweet twitter-tweet-rendered" style="display: flex; max-width: 550px; width: 100%; margin-top: 10px; margin-bottom: 10px;"><iframe id="twitter-widget-1" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="" style="position: static; visibility: visible; width: 390px; height: 671px; display: block; flex-grow: 1;" title="Twitter Tweet" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/Tweet.html" data-tweet-id="1488080724725219328"></iframe></div>
+<p> <script async="" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/widgets.js" charset="utf-8"></script><br>
+上記のようなアプリのチュートリアルです。<br>
+なお、具体的には、次のような技術を使います。</p> -->
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> アプリ作成で利用する技術</p>
+<ul>
+<li>Solidity：スマートコントラクトの実装</li>
+<li>Web3.js：フロントエンドからスマコンの操作</li>
+<li>Metamask：フロントエンドからトークンの送金</li>
+</ul>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> もくじ</p>
+<ul>
+<li>１．Faucet用のスマートコントラクトを作る</li>
+<li>２．スマートコントラクトを「デプロイ」する</li>
+<li>３．スマートコントラクトとフロントエンドを繋ぐ</li>
+</ul>
+<p>それでは、見ていきましょう。</p>
+<h2>１．Faucet用のスマートコントラクトを作る</h2>
+<p>まずは、下記の２つを作成します。</p>
+<ul>
+<li>その①：トークン用のスマートコントラクト</li>
+<li>その②：Faucet用のスマートコントラクト</li>
+</ul>
+<p>上記のとおりなので、順番にみていきます。</p>
+<h3>その①：トークン用のスマートコントラクト</h3>
+<p>まずは「トークン用のコントラクト」を作ります。</p>
+<p>Faucetから「イーサ」を吐き出してもいいのですが、勉強のために「トークン作成」から進めていこうと思います。イーサを吐き出す場合は、トークン用のスマートコントラクトを作らなくてもOKです。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> トークン発行用のスマートコントラクト</p>
+<pre style="margin-bottom: 60px;" class=" language-php"><code class=" language-php"><span class="token comment" spellcheck="true">// SPDX-License-Identifier: MIT</span>
+pragma solidity <span class="token operator">^</span><span class="token number">0.8</span><span class="token punctuation">.</span><span class="token number">2</span><span class="token punctuation">;</span>
+
+import <span class="token string">"@openzeppelin/contracts/token/ERC20/ERC20.sol"</span><span class="token punctuation">;</span>
+
+contract ManabuBananaToken is <span class="token constant">ERC20</span> <span class="token punctuation">{</span>
+    <span class="token function">constructor</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token function">ERC20</span><span class="token punctuation">(</span><span class="token string">"Manabu Banana Token"</span><span class="token punctuation">,</span> <span class="token string">"MBT"</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        <span class="token function">_mint</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span> <span class="token number">1000000</span> <span class="token operator">*</span> <span class="token number">10</span> <span class="token operator">*</span><span class="token operator">*</span> <span class="token function">decimals</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>上記のとおり。めちゃくちゃシンプルですよね。</p>
+<p>今回は「<a href="https://openzeppelin.com/" rel="noopener" target="_blank">OpenZeppelin</a>」というライブラリを使っているので、たった数行のコードでトークン発行できています。</p>
+<p>なお、コードでは「ManabuBananaToken (＝マナブ・バナナ・トークン)」を発行しています。枚数は「百万枚 (=1,000,000)」です。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> OpenZeppelinのライブラリの使い方</p>
+<!-- <p>結論は、下記のツイートのとおり。</p>
+<div class="twitter-tweet twitter-tweet-rendered" style="display: flex; max-width: 550px; width: 100%; margin-top: 10px; margin-bottom: 10px;"><iframe id="twitter-widget-2" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" class="" style="position: static; visibility: visible; width: 390px; height: 717px; display: block; flex-grow: 1;" title="Twitter Tweet" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/Tweet(1).html" data-tweet-id="1486183908702322691"></iframe></div> -->
+<p> <script async="" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/widgets.js" charset="utf-8"></script><br>
+OpenZeppelinのサイト内に「<a href="https://docs.openzeppelin.com/contracts/4.x/wizard" rel="noopener" target="_blank">Contracts Wizard</a>」というページがあります。ここを使うことで、秒速でトークン発行できます。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> 補足：ライブラリなしでトークン発行する方法</p>
+<p>OpenZeppelinは便利ですが、しかし「内部のブラックボックス化」が起こりますよね。要するに「動いたけど、、意味がわからん」という状態です。</p>
+<p>ここを防ぐには「<a href="https://medium.com/geekculture/how-to-create-your-own-bep20-tokens-on-binance-smart-chain-bsc-d7075ba2f057" rel="noopener" target="_blank">Create your own BEP20 tokens</a>」という記事がオススメです。こちらのチュートリアルを学べば、ライブラリなしでトークン発行を学べます。</p>
+<p>というわけで、以上が「トークン発行」のパートです。</p>
+<p>世の中には大量のトークンが出回っていますが、実はこんなにも簡単に作れる訳ですね。仕組みが分かると、マーケットの見え方も変わると思います。</p>
+<h3>その②：Faucet用のスマートコントラクト</h3>
+<p>続いては「Faucet機能を持つスマートコントラクト」を作ります。結論としては、下記コードがスマートコントラクトの全文です。</p>
+<pre style="margin-bottom: 60px;" class=" language-php"><code class=" language-php"><span class="token comment" spellcheck="true">// SPDX-License-Identifier: UNLISCENSED</span>
+pragma solidity <span class="token operator">^</span><span class="token number">0.8</span><span class="token punctuation">.</span><span class="token number">4</span><span class="token punctuation">;</span>
+
+<span class="token keyword">interface</span> <span class="token class-name">ERC20</span> <span class="token punctuation">{</span>
+    
+     <span class="token comment" spellcheck="true">/**
+     * @dev returns the tokens owned by `account`.
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">balanceOf</span><span class="token punctuation">(</span>address account<span class="token punctuation">)</span> external view returns <span class="token punctuation">(</span>uint256<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+     <span class="token comment" spellcheck="true">/**
+     * @dev returns the decimal places of a token
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">decimals</span><span class="token punctuation">(</span><span class="token punctuation">)</span> external view returns <span class="token punctuation">(</span>uint8<span class="token punctuation">)</span><span class="token punctuation">;</span>
+
+    <span class="token comment" spellcheck="true">/**
+     * @dev transfers the `amount` of tokens from caller's account
+     * to the `recipient` account.
+     *
+     * returns boolean value indicating the operation status.
+     *
+     * Emits a {Transfer} event
+     */</span>
+    <span class="token keyword">function</span> <span class="token function">transfer</span><span class="token punctuation">(</span>address recipient<span class="token punctuation">,</span> uint256 amount<span class="token punctuation">)</span>
+        external
+        returns <span class="token punctuation">(</span>bool<span class="token punctuation">)</span><span class="token punctuation">;</span>
+ 
+<span class="token punctuation">}</span>
+
+contract MBTFaucet <span class="token punctuation">{</span>
+    
+    <span class="token comment" spellcheck="true">// The underlying token of the Faucet</span>
+    <span class="token constant">ERC20</span> token<span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// The address of the faucet owner</span>
+    address owner<span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// For rate limiting</span>
+    <span class="token function">mapping</span><span class="token punctuation">(</span>address<span class="token operator">=</span><span class="token operator">&gt;</span>uint256<span class="token punctuation">)</span> nextRequestAt<span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// No.of tokens to send when requested</span>
+    uint256 faucetDripAmount <span class="token operator">=</span> <span class="token number">1</span><span class="token punctuation">;</span>
+    
+    <span class="token comment" spellcheck="true">// Sets the addresses of the Owner and the underlying token</span>
+    constructor <span class="token punctuation">(</span>address _mbtAddress<span class="token punctuation">,</span> address _ownerAddress<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+        token <span class="token operator">=</span> <span class="token function">ERC20</span><span class="token punctuation">(</span>_mbtAddress<span class="token punctuation">)</span><span class="token punctuation">;</span>
+        owner <span class="token operator">=</span> _ownerAddress<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>   
+    
+    <span class="token comment" spellcheck="true">// Verifies whether the caller is the owner </span>
+    modifier onlyOwner<span class="token punctuation">{</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender <span class="token operator">==</span> owner<span class="token punctuation">,</span><span class="token string">"FaucetError: Caller not owner"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        _<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>
+    
+    <span class="token comment" spellcheck="true">// Sends the amount of token to the caller.</span>
+    <span class="token keyword">function</span> <span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span> external <span class="token punctuation">{</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>token<span class="token punctuation">.</span><span class="token function">balanceOf</span><span class="token punctuation">(</span><span class="token function">address</span><span class="token punctuation">(</span>this<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&gt;</span> <span class="token number">1</span><span class="token punctuation">,</span><span class="token string">"FaucetError: Empty"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>nextRequestAt<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">&lt;</span> block<span class="token punctuation">.</span>timestamp<span class="token punctuation">,</span> <span class="token string">"FaucetError: Try again later"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        
+        <span class="token comment" spellcheck="true">// Next request from the address can be made only after 5 minutes         </span>
+        nextRequestAt<span class="token punctuation">[</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">]</span> <span class="token operator">=</span> block<span class="token punctuation">.</span>timestamp <span class="token operator">+</span> <span class="token punctuation">(</span><span class="token number">5</span> minutes<span class="token punctuation">)</span><span class="token punctuation">;</span> 
+        
+        token<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>msg<span class="token punctuation">.</span>sender<span class="token punctuation">,</span>faucetDripAmount <span class="token operator">*</span> <span class="token number">10</span><span class="token operator">*</span><span class="token operator">*</span>token<span class="token punctuation">.</span><span class="token function">decimals</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>  
+    
+    <span class="token comment" spellcheck="true">// Updates the underlying token address</span>
+     <span class="token keyword">function</span> <span class="token function">setTokenAddress</span><span class="token punctuation">(</span>address _tokenAddr<span class="token punctuation">)</span> external onlyOwner <span class="token punctuation">{</span>
+        token <span class="token operator">=</span> <span class="token function">ERC20</span><span class="token punctuation">(</span>_tokenAddr<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+    
+    <span class="token comment" spellcheck="true">// Updates the drip rate</span>
+     <span class="token keyword">function</span> <span class="token function">setFaucetDripAmount</span><span class="token punctuation">(</span>uint256 _amount<span class="token punctuation">)</span> external onlyOwner <span class="token punctuation">{</span>
+        faucetDripAmount <span class="token operator">=</span> _amount<span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>  
+     
+     
+     <span class="token comment" spellcheck="true">// Allows the owner to withdraw tokens from the contract.</span>
+     <span class="token keyword">function</span> <span class="token function">withdrawTokens</span><span class="token punctuation">(</span>address _receiver<span class="token punctuation">,</span> uint256 _amount<span class="token punctuation">)</span> external onlyOwner <span class="token punctuation">{</span>
+        <span class="token keyword">require</span><span class="token punctuation">(</span>token<span class="token punctuation">.</span><span class="token function">balanceOf</span><span class="token punctuation">(</span><span class="token function">address</span><span class="token punctuation">(</span>this<span class="token punctuation">)</span><span class="token punctuation">)</span> <span class="token operator">&gt;=</span> _amount<span class="token punctuation">,</span><span class="token string">"FaucetError: Insufficient funds"</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+        token<span class="token punctuation">.</span><span class="token function">transfer</span><span class="token punctuation">(</span>_receiver<span class="token punctuation">,</span>_amount<span class="token punctuation">)</span><span class="token punctuation">;</span>
+    <span class="token punctuation">}</span>    
+<span class="token punctuation">}</span></code></pre>
+<p>上記のコードは「<a href="https://betterprogramming.pub/how-to-deploy-a-faucet-for-your-token-on-the-polygon-network-363785e52d67" rel="noopener" target="_blank">How To Deploy a Faucet</a>」の記事を参考にしました。</p>
+<p>なお、申し訳ありませんが、この記事でスマートコントラクトの詳しい説明は省きます。詳しい内容は、引用元の記事をご覧ください。</p>
+<p>ちなみに、スマートコントラクトの最初に「<code>interface</code>」という記述がありますが、ここの解説は「<a href="https://cryptomarketpool.com/interface-in-solidity-smart-contracts/#:~:text=In%20object%2Doriented%20programming%20an,specific%20functions%20in%20another%20object." rel="noopener" target="_blank">Interface in Solidity smart contracts</a>」が詳しいです。</p>
+<p>そして「<code>contract MBTFaucet {}</code>」の内部に関しては、１つ１つのコードを読んでいけば、全体の流れは理解できるはずです。基本的には「JSの基礎知識」が必須だと思います。</p>
+<p>というわけで、以上がスマートコントラクトのパートです。<br>
+続いては「スマコンのデプロイ」に進みます。</p>
+<h2>２．スマートコントラクトを「デプロイ」する</h2>
+<p>スマコンのデプロイは「<a href="https://remix.ethereum.org/" rel="noopener" target="_blank">Remix – Ethereum IDE</a>」を使います。</p>
+<ul>
+<li>手順①：トークンをデプロイする</li>
+<li>手順②：Faucet機能をデプロイする</li>
+</ul>
+<p>上記の順番で進めていきます。速攻で完了します。</p>
+<h3>手順①：トークンをデプロイする</h3>
+<p>下記の画像のとおりに設定してください。<br>
+<a href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/token-1.jpg"><img decoding="async" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/token-1.jpg" alt="" width="1500" height="937" class="alignnone size-full wp-image-28594" srcset="https://manablog.org/wp-content/uploads/2022/02/token-1.jpg 1500w, https://manablog.org/wp-content/uploads/2022/02/token-1-320x200.jpg 320w, https://manablog.org/wp-content/uploads/2022/02/token-1-1024x640.jpg 1024w, https://manablog.org/wp-content/uploads/2022/02/token-1-768x480.jpg 768w" sizes="(max-width: 1500px) 100vw, 1500px"></a><br>
+その後に「Deploy」というオレンジ色のボタンを押すだけです。するとメタマスクが立ち上がり、ブロックチェーンにデプロイできます。以上で完了。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> 補足：コントラクトが表示されない場合</p>
+<p>上記の画像内の「CONTRACT」の部分に「ManabuBananaToken」といった表示が出てこない場合は、Remixの「オートコンパイル機能」を「オン」にしてください。方法は「<a href="https://manablog.org/wp-content/uploads/2022/02/comp-1.jpg" rel="noopener" target="_blank">こちら</a>」の画像で解説しました。</p>
+<p>なお、もっと深くRemixについて学習したい場合は「<a href="https://youtu.be/ipwxYa-F1uY" rel="noopener" target="_blank">Solidity Tutorial – A Full Course on Ethereum</a>」の動画が参考になります。動画を見ることで、Solidityの基礎と、Remixの基礎を学べるはずです。</p>
+<h3>手順②：Faucet機能をデプロイする</h3>
+<p>トークンと同じです。下記の画像のとおり。<br>
+<a href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/faucet-1.jpg"><img decoding="async" loading="lazy" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/faucet-1.jpg" alt="" width="1500" height="937" class="alignnone size-full wp-image-28595" srcset="https://manablog.org/wp-content/uploads/2022/02/faucet-1.jpg 1500w, https://manablog.org/wp-content/uploads/2022/02/faucet-1-320x200.jpg 320w, https://manablog.org/wp-content/uploads/2022/02/faucet-1-1024x640.jpg 1024w, https://manablog.org/wp-content/uploads/2022/02/faucet-1-768x480.jpg 768w" sizes="(max-width: 1500px) 100vw, 1500px"></a><br>
+しかし、１つだけ注意点があります。オレンジ色の部分です。</p>
+<ul>
+<li>_MBTADDRESS：トークンのコントラクトアドレスを記入</li>
+<li>_OWNERADDRESS：トークンオーナーのウォレットアドレスを記入</li>
+</ul>
+<p>オレンジ色の部分には、上記のように記入します。先ほどにトークンを発行しているので、すでに「コントラクトアドレス」と「トークンのオーナーのアドレス (＝自分のMetamaskのアドレス)」は把握していますよね。</p>
+<p>記入後に「Deployボタン」を押すと、完了します。これにて、スマートコントラクトのデプロイが完了。参考までに、僕のFaucet情報が下記です。</p>
+<ul>
+<li>トークンのコントラクトアドレス：<a href="https://rinkeby.etherscan.io/address/0xb586592Bf648e54d420dD57EfF861932D5E9A915" rel="noopener" target="_blank">0xb58…</a></li>
+<li>オーナーのウォレットアドレス：<a href="https://rinkeby.etherscan.io/address/0x9538Ae4533B7dD36e4f38964119a730d422A6DEF" rel="noopener" target="_blank">0x953…</a></li>
+</ul>
+<p>上記を見てみると、実際の履歴が分かるはずです。なお、ネットワークは「Ethereum」の「Rinkebyテストネット」を使っています。</p>
+<h2>３．スマートコントラクトとフロントエンドを繋ぐ</h2>
+<p>というわけで、最終パートです。</p>
+<ul>
+<li>手順①：簡単なHTMLを作る</li>
+<li>手順②：フロントエンドとスマコンを繋ぐ</li>
+</ul>
+<p>上記を進めていきます。楽しいパートです。</p>
+<h3>手順①：簡単なHTMLを作る</h3>
+<p>フロントエンドは超シンプルです。</p>
+<pre style="margin-bottom: 60px;" class=" language-php"><code class=" language-php"><span class="token markup"><span class="token doctype">&lt;!DOCTYPE html&gt;</span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>html</span><span class="token punctuation">&gt;</span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>head</span><span class="token punctuation">&gt;</span></span></span>
+	<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>title</span><span class="token punctuation">&gt;</span></span></span>Faucet Demo<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>title</span><span class="token punctuation">&gt;</span></span></span>
+	<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>script</span> <span class="token attr-name">src</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>https://cdn.jsdelivr.net/npm/web3@latest/dist/web3.min.js<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></span><span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>script</span><span class="token punctuation">&gt;</span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>head</span><span class="token punctuation">&gt;</span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>body</span><span class="token punctuation">&gt;</span></span></span>
+	<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>p</span><span class="token punctuation">&gt;</span></span></span>Faucetのデモサイト<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>p</span><span class="token punctuation">&gt;</span></span></span>
+	<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;</span>button</span> <span class="token attr-name">type</span><span class="token attr-value"><span class="token punctuation">=</span>“button”</span> <span class="token attr-name">onclick</span><span class="token attr-value"><span class="token punctuation">=</span><span class="token punctuation">"</span>doFunction();<span class="token punctuation">"</span></span><span class="token punctuation">&gt;</span></span></span>トークンをゲットする<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>button</span><span class="token punctuation">&gt;</span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>body</span><span class="token punctuation">&gt;</span></span></span>
+<span class="token markup"><span class="token tag"><span class="token tag"><span class="token punctuation">&lt;/</span>html</span><span class="token punctuation">&gt;</span></span></span></code></pre>
+<p>これだけです。説明は不要ですよね。</p>
+<p>強いていうなら「head」の部分で「web3.js」を読み込んでいます。<br>
+こちらのJSを読み込むことで、スマコンを操作することが出来ます。</p>
+<h3>手順②：フロントエンドとスマコンを繋ぐ</h3>
+<p>続いては「Web.js」を触っていきます。</p>
+<p>ここからの内容は「<a href="https://livecodestream.dev/post/interacting-with-smart-contracts-from-web-apps/">Interacting with Smart Contracts from Web Apps</a>」という記事を参考にしました。こちらを参考にしつつ、カスタマイズしています。</p>
+<p>なお、ここからのスクリプトでは、次の２つを実行しています。</p>
+<ul>
+<li>その(1) メタマスク＆スマコンに接続する</li>
+<li>その(2) スマートコントラクトを実行する</li>
+</ul>
+<p>これだけです。まずは完成版のコードを貼っておきます。</p>
+<pre style="margin-bottom: 60px;" class=" language-php"><code class=" language-php"><span class="token comment" spellcheck="true">// メタマスクに接続する</span>
+async <span class="token keyword">function</span> <span class="token function">loadWeb3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>ethereum<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		window<span class="token punctuation">.</span>web3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Web3</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>ethereum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		window<span class="token punctuation">.</span>ethereum<span class="token punctuation">.</span><span class="token function">enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// コントラクトに接続する</span>
+async <span class="token keyword">function</span> <span class="token function">loadContract</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">return</span> await <span class="token keyword">new</span> <span class="token class-name">window<span class="token punctuation">.</span>web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span>Contract</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>省略<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+	<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'【Faucetのコントラクトアドレスを記載する】'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// 利用者のメタマスクのウォレットアドレスを取得</span>
+async <span class="token keyword">function</span> <span class="token function">getCurrentAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">const</span> accounts <span class="token operator">=</span> await window<span class="token punctuation">.</span>web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span><span class="token function">getAccounts</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token keyword">return</span> accounts<span class="token punctuation">[</span><span class="token number">0</span><span class="token punctuation">]</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// ボタンがクリックされたときに、Faucetのコントラクトを実行する</span>
+async <span class="token keyword">function</span> <span class="token function">doFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> account <span class="token operator">=</span> await <span class="token function">getCurrentAccount</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>　<span class="token comment" spellcheck="true">// 利用者のメタマスクのウォレットアドレスを取得</span>
+	<span class="token keyword">const</span> send <span class="token operator">=</span> await window<span class="token punctuation">.</span>contract<span class="token punctuation">.</span>methods<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">{</span> from<span class="token punctuation">:</span> account <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	console<span class="token punctuation">.</span><span class="token function">log</span><span class="token punctuation">(</span>send<span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span>
+
+<span class="token comment" spellcheck="true">// メタマスクとコントラクトへの接続を実行する機能</span>
+async <span class="token keyword">function</span> <span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	await <span class="token function">loadWeb3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// メタマスクに接続する</span>
+	window<span class="token punctuation">.</span>contract <span class="token operator">=</span> await <span class="token function">loadContract</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// コントラクトに接続する</span>
+<span class="token punctuation">}</span>
+<span class="token function">load</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span> <span class="token comment" spellcheck="true">// メタマスクとコントラクトへの接続を実行する機能を実行する</span></code></pre>
+<p>上記のとおり。なお、コントラクトに接続するファンクションは、部分的に省略しています。完全版のコードは「<a href="https://gist.github.com/manabubannai/e8f9067354ba5b92930605193f40cbfe" rel="noopener" target="_blank">Github</a>」に公開しておきました。</p>
+<p>いくつかのコードについて、下記で深堀りをします。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> メタマスクに接続する</p>
+<pre style="margin-bottom: 40px;" class=" language-php"><code class=" language-php">async <span class="token keyword">function</span> <span class="token function">loadWeb3</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">if</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>ethereum<span class="token punctuation">)</span> <span class="token punctuation">{</span>
+		window<span class="token punctuation">.</span>web3 <span class="token operator">=</span> <span class="token keyword">new</span> <span class="token class-name">Web3</span><span class="token punctuation">(</span>window<span class="token punctuation">.</span>ethereum<span class="token punctuation">)</span><span class="token punctuation">;</span>
+		window<span class="token punctuation">.</span>ethereum<span class="token punctuation">.</span><span class="token function">enable</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+	<span class="token punctuation">}</span>
+<span class="token punctuation">}</span></code></pre>
+<p>上記にて「メタマスクへの接続」ができます。画面をロードすると、メタマスクのポップアップが出てくる感じですね。なお「async」については「<a href="https://www.sejuku.net/blog/69618" rel="noopener" target="_blank">async / awaitの使い方の記事</a>」をどうぞ。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> コントラクトに接続する</p>
+<pre style="margin-bottom: 40px;" class=" language-php"><code class=" language-php">async <span class="token keyword">function</span> <span class="token function">loadContract</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">{</span>
+	<span class="token keyword">return</span> await <span class="token keyword">new</span> <span class="token class-name">window<span class="token punctuation">.</span>web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span>Contract</span><span class="token punctuation">(</span><span class="token punctuation">[</span> <span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>省略<span class="token punctuation">.</span><span class="token punctuation">.</span><span class="token punctuation">.</span>
+	<span class="token punctuation">]</span><span class="token punctuation">,</span><span class="token string">'【Faucetのコントラクトアドレスを記載する】'</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>スマコン接続は上記なのですが、ここでは「ABI」を利用します。</p>
+<p>ABIとは「Application Binary Interface」のことで、そのまま翻訳すると「２つのアプリケーション用のインターフェイス」です。要するに「２つのアプリ」を繋ぐ訳ですね。今回のケースだと「フロントエンドとスマコン」を繋ぎます。</p>
+<p style="margin-bottom: -15px;" class="point"><i class="fa fa-check" aria-hidden="true"></i> ABIの取得方法は、下記の画像のとおりです。</p>
+<p><a href="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/abi-1.jpg"><img decoding="async" loading="lazy" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/abi-1.jpg" alt="" width="1500" height="938" class="alignnone size-full wp-image-28598" srcset="https://manablog.org/wp-content/uploads/2022/02/abi-1.jpg 1500w, https://manablog.org/wp-content/uploads/2022/02/abi-1-320x200.jpg 320w, https://manablog.org/wp-content/uploads/2022/02/abi-1-1024x640.jpg 1024w, https://manablog.org/wp-content/uploads/2022/02/abi-1-768x480.jpg 768w" sizes="(max-width: 1500px) 100vw, 1500px"></a><br>
+赤枠に注意しつつ、コピーしてください。僕は自分で作業するときに、ここで「別のコントラクトのABI」をコピーしてしまい、２時間ほど消耗しました。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> コピーしたABIは、下記の部分に貼り付けます。</p>
+<pre style="margin-bottom: 40px;" class=" language-php"><code class=" language-php"><span class="token keyword">return</span> await <span class="token keyword">new</span> <span class="token class-name">window<span class="token punctuation">.</span>web3<span class="token punctuation">.</span>eth<span class="token punctuation">.</span>Contract</span><span class="token punctuation">(</span>【ここに貼り付け】<span class="token punctuation">)</span></code></pre>
+<p>上記のとおり。これでフロントエンドからスマコンを操作できるようになります。なお、繰り返しですが、完全なコードは「<a href="https://gist.github.com/manabubannai/e8f9067354ba5b92930605193f40cbfe" rel="noopener" target="_blank">Github</a>」にあります。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> スマートコントラクトを実行する</p>
+<pre style="margin-bottom: 40px;" class=" language-php"><code class=" language-php">async <span class="token keyword">function</span> <span class="token function">doFunction</span><span class="token punctuation">(</span><span class="token punctuation">)</span> <span class="token punctuation">{</span>
+	<span class="token keyword">const</span> account <span class="token operator">=</span> <span class="token string">'【利用者のメタマスクのアドレス】'</span><span class="token punctuation">;</span>
+	<span class="token keyword">const</span> send <span class="token operator">=</span> await window<span class="token punctuation">.</span>contract<span class="token punctuation">.</span>methods<span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">)</span><span class="token punctuation">.</span><span class="token function">send</span><span class="token punctuation">(</span><span class="token punctuation">{</span> from<span class="token punctuation">:</span> account <span class="token punctuation">}</span><span class="token punctuation">)</span><span class="token punctuation">;</span>
+<span class="token punctuation">}</span></code></pre>
+<p>上記でFaucetを実行できます。なお、実際のコードでは「<code>getCurrentAccount()</code>」のファンクションを定義して、自動で利用者のメタマスクアドレスを取得しています。</p>
+<h3>作成したアプリを実行してみる</h3>
+<p>というわけで、以上です。最後に、アプリを実行しましょう。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> 追記（2022年2月5日）：Faucetにコインを投入する件</p>
+<p>１つ記載を忘れていました。作成した「Faucetのコントラクト」には、必ず「自分が作成したトークン」を入れておくようにしてください。トークンのオーナーアドレスから、Faucetのコントラクトアドレスに、自作したトークンを送付したらOKです。</p>
+<p>なお、ローカル環境ではメタマスクが動きませんので、Node.jsの「<a href="https://rennnosukesann.hatenablog.com/entry/2018/03/19/233245" rel="noopener" target="_blank">serve</a>」というライブラリが便利です。こちらをインストールすると、ローカル環境でメタマスクを実行できます。</p>
+<p class="point"><i class="fa fa-check" aria-hidden="true"></i> すべてのコードをまとめておきます</p>
+<ul>
+<li>アプリのリンク：<a href="https://manabu-crypto.me/faucet/" rel="noopener" target="_blank">Faucetのデモサイト</a></li>
+<li>スマートコントラクト①：<a href="https://gist.github.com/manabubannai/b99d7569f1350023fb4580549895280b" rel="noopener" target="_blank">トークン発行用のコード</a></li>
+<li>スマートコントラクト②：<a href="https://gist.github.com/manabubannai/78950e58a21270173eac73e312ea96a3" rel="noopener" target="_blank">Faucet機能の為のコード</a></li>
+<li>フロントエンドのコード：<a href="https://gist.github.com/manabubannai/e8f9067354ba5b92930605193f40cbfe" rel="noopener" target="_blank">HTML、Web3.jsを利用</a></li>
+</ul>
+<p>というわけで、以上となります。<br>
+スマートコントラクトは、楽しいですね (｀･ω･´)ゞ</p>
+	
+	<p><i>P.S：普段の僕は「<a href="https://twitter.com/himatubusi208" target="new">Twitter</a>」を軸に発信しています。また最近は「<a href="../../2022 6/6:27/index.html" target="new">Webマーケ教材</a>」の作成に注力しており、ネットで稼ぐスキルを学べます。ブログの更新通知は、twitterでお知らせしていきます。</i></p>
+
+	<p itemprop="keywords" class="keywords"><i class="fa fa-tags" aria-hidden="true"></i> <a href="index.html" rel="tag">topへ</a></p>
+
+	<ul class="sns_button list-unstyled clearfix">
+	<!--
+	<li class="facebook-btn-icon col-xs-2">
+		<a class="facebook-btn-icon-link" href="http://www.facebook.com/sharer.php?u=https://manablog.org/solidity-faucet/&amp;t=Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】" target="_blank">
+			<span class="icon-facebook"></span>
+			facebook
+		</a>
+	</li>
+	-->
+	<li class="twitter-btn-icon col-xs-2">
+		<a class="twitter-btn-icon-link" href="https://twitter.com/himatubusi208" target="_blank">
+			<span class="icon-twitter"></span>
+			<span class="sns-share-small_text">Tweet</span>
+		</a>
+	</li>
+	<!--
+	<li class="hatena-btn-icon col-xs-2">
+		<a class="hatena-btn-icon-link" href="http://b.hatena.ne.jp/add?mode=confirm&url=https://manablog.org/solidity-faucet/&title=Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】" target="_blank">
+			<span class="icon-hatebu"></span>
+			<span class="sns-share-small_text">hatebu</span>
+		</a>
+	</li>
+	-->
+	<li class="google-plus-btn-icon col-xs-2">
+		<a href="#" class="google-plus-btn-icon-link" target="_blank">
+			<span class="icon-line"></span>
+			<span class="sns-share-small_text">作成中</span>
+		</a>
+	</li>
+	<li class="pocket-btn-icon col-xs-2">
+		<a href="#" class="pocket-btn-icon-link" target="_blank">
+			<span class="icon-pocket"></span>
+			<span class="sns-share-small_text">作成中</span>
+		</a>
+	</li>
+	<!--
+	<li class="fb-like-btn-icon col-xs-2">
+		<fb:like href="https://manablog.org/solidity-faucet/" layout="button_count" action="like" show_faces="false" share="false" class="fb-like"></fb:like>
+	</li>
+	-->
+</ul>
+	<div class="relatedposts clearfix">
+
+
+		<h4>関連記事</h4>
+
+		<div class="col-xs-12">
+
+		
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2019/10/shutterstock_625702355-e1570070692252.jpg);" href="../../../2019/2019 10/page3/10:6/index.html" title="プログラミングとブログで、どちらが稼げますか【結論：仕事を取ろう】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2019/2019 10/page3/10:6/index.html" title="プログラミングとブログで、どちらが稼げますか【結論：仕事を取ろう】">
+					プログラミングとブログで、どちらが稼げますか【結論：仕事を取...				</a>
+			</h5>
+			<p>
+				<a href="../../../2019/2019 10/page3/10:6/index.html">Blog</a>			</p>
+		</div>
+
+		
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/08/shutterstock_707951359-e1533698625415.jpg);" href="../../../2018/2018 8/page3/8:11/index.html" title="【プロが語る】WIXはSEOに弱いけど便利です【WordPressの勝利】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2018/2018 8/page3/8:11/index.html" title="【プロが語る】WIXはSEOに弱いけど便利です【WordPressの勝利】">
+					【プロが語る】WIXはSEOに弱いけど便利です【WordPr...				</a>
+			</h5>
+			<p>
+				<a href="../../../2018/2018 8/page3/8:11/index.html">PROGRAMMING</a>			</p>
+		</div>
+
+		
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/11/shutterstock_267007895-1-e1543557828609.jpg);" href="../../../2018/2018 12/page4/12:1/index.html" title="エンジニアがアフィリエイトを始めると、収益無双する件【2018年】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2018/2018 12/page4/12:1/index.html" title="エンジニアがアフィリエイトを始めると、収益無双する件【2018年】">
+					エンジニアがアフィリエイトを始めると、収益無双する件【201...				</a>
+			</h5>
+			<p>
+				<a href="../../../2018/2018 12/page4/12:1/index.html">PROGRAMMING</a>			</p>
+		</div>
+
+		
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2017/08/8741b90d01119cbfb6e10d3467914b43.jpg);" href="../../../2017/2017 8/page1/8:25/index.html" title="Web制作案件が炎上する理由【断る勇気＆目的共有の重要性について】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2017/2017 8/page1/8:25/index.html" title="Web制作案件が炎上する理由【断る勇気＆目的共有の重要性について】">
+					Web制作案件が炎上する理由【断る勇気＆目的共有の重要性につ...				</a>
+			</h5>
+			<p>
+				<a href="../../../2017/2017 8/page1/8:25/index.html">PROGRAMMING</a>			</p>
+		</div>
+
+				</div>
+
+	</div>
+
+<div class="relatedposts clearfix">
+	<h4>スキル学習のまとめ記事（※有料記事を含む）</h4>
+	<div class="col-xs-12">
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2022/06/shutterstock_1911971479-min.jpg);" href="../../2022 6/6:27/index.html" title="個人で稼ぎ、自由に生きる為の、Webマーケ入門教材【10年の知識】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../2022 6/6:27/index.html" title="個人で稼ぎ、自由に生きる為の、Webマーケ入門教材【10年の知識】">
+					個人で稼ぎ、自由に生きる為の、Webマーケ入門教材【10年の知識】
+				</a>
+			</h5>
+			<p>
+				<a href="../../2022 6/6:27/index.html">MARKETING</a>
+			</p>
+		</div>
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2019/05/shutterstock_1349672450.jpg);" href="../../../2019/2019 5/page2/5:14/index.html" title="ブログ型アフィリエイトの完全講義【ブログ歴６年の僕の集大成です】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2019/2019 5/page2/5:14/index.html" title="ブログ型アフィリエイトの完全講義【ブログ歴６年の僕の集大成です】">
+					ブログ型アフィリエイトの完全講義【ブログ歴６年の僕の集大成です】
+				</a>
+			</h5>
+			<p>
+				<a href="../../../2019/2019 5/page2/5:14/index.html">Blog</a>
+			</p>
+		</div>
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/06/aff_top_img-1.jpg);" href="../../../../seo/affiliate/index.html" title="アフィリエイト学習の完全マップ【知識ゼロ→月10万円を目指す方法】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../../seo/affiliate/index.html" title="アフィリエイト学習の完全マップ【知識ゼロ→月10万円を目指す方法】">
+					アフィリエイト学習の完全マップ【知識ゼロ→月10万円を目指す方法】
+				</a>
+			</h5>
+			<p>
+				<a href="../../../../seo/affiliate/index.html">Affiliate</a>
+			</p>
+		</div>
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/06/seo_img_top.jpg);" href="../../../../seo/seo/index.html" title="SEO対策の完全マップ【入門・基礎・中級・上級：16記事で解説】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../../seo/seo/index.html" title="SEO対策の完全マップ【入門・基礎・中級・上級：16記事で解説】">
+					SEO対策の完全マップ【入門・基礎・中級・上級：16記事で解説】
+				</a>
+			</h5>
+			<p>
+				<a href="../../../../seo/seo/index.html">SEO</a>
+			</p>
+		</div>
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/06/e467380e916dc58ebc01366c57a66445.jpg);" href="../../../2018/2018 6/page2/6:19/index.html" title="プログラミング学習の始め方｜３ヶ月で達成可能【完全初心者向け】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2018/2018 6/page2/6:19/index.html" title="【完全初心者向け】プログラミング学習の始め方【３ヶ月で達成できる】">
+					【完全初心者向け】プログラミング学習の始め方【３ヶ月で達成できる】
+				</a>
+			</h5>
+			<p>
+				<a href="../../../2018/2018 6/page2/6:19/index.html">PROGRAMMING</a>
+			</p>
+		</div>
+		<div class="col-xs-6 inner">
+			<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+				<a style="background-image:url(https://manablog.org/wp-content/uploads/2014/09/2f69353fdd8ffd2b570a01af80692938.jpg);" href="../../../2014/2014 9/9:27/index.html" title="【独学でWeb制作マスター】勉強方法のまとめ【初心者向け】" itemprop="url" class="thumbnail-img"></a>
+			</div>
+			<h5>
+				<a href="../../../2014/2014 9/9:27/index.html" title="【独学でWeb制作マスター】勉強方法のまとめ【初心者向け】">
+					【独学でWeb制作マスター】勉強方法のまとめ【初心者向け】
+				</a>
+			</h5>
+			<p>
+				<a href="../../../2014/2014 9/9:27/index.html">PROGRAMMING</a>
+			</p>
+		</div>
+	</div>
+</div>
+</div>
+				</div> <!-- end of articleBody -->
+			</section>
+		</article>
+		<aside id="sidebar" class="col-xs-12 col-sm-12 col-md-4" role="complementary" itemscope="itemscope" itemtype="http://schema.org/WPSideBar">
+			<div class="col-xs-12 author" itemprop="author" itemscope="" itemtype="http://schema.org/Person">
+				<!-- <img src="/images/manabu.jpg" alt="" class="img-responsive img-circle"> -->
+				<img src="../../../../yuublog_files/IMG_2852.jpeg" class="img-responsive img-circle">
+				<h4><span itemprop="name">yuudai</span></h4>
+				<hr>
+				<p>
+					ブログ・アフィリエイト・プログラミングを愛しています。 高校生ブロガーです。日々アウトプットして、知識を増やしていこうと思います。主にプログラミングのことについて発信していきます！
+				<a href="../../../../about/index.html" class="pull-right">プロフィール詳細 <i class="fa fa-angle-right"></i></a>
+		
+			</div>
+		
+			<div class="col-xs-12 form-group">
+				<!-- <form method="get" action="https://manablog.org/" class="search-form">
+					<div class="form-group has-feedback">
+						<input type="text" name="s" id="s" placeholder="Search for..." class="form-control">
+						<span class="glyphicon glyphicon-search form-control-feedback"></span>
+					</div>
+				</form> -->
+			</div>
+		
+			<div class="col-xs-12 popular text-center">
+				<h4>よく読まれている記事</h4>
+				<hr>
+				<!-- サムネイルの表示 -->
+				<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+					<a style="background-image:url(https://manablog.org/wp-content/uploads/2019/05/shutterstock_1349672450.jpg);" href="../../../2019/2019 5/page2/5:14/index.html" title="ブログ型アフィリエイトの完全講義【ブログ歴６年の僕の集大成です】" itemprop="url" class="thumbnail-img"></a>
+				</div>
+		
+				<!-- タイトル表示 -->
+				<h5 class="title" itemprop="name headline">
+					<a href="../../../2019/2019 5/page2/5:14/index.html" title="ブログ型アフィリエイトの完全講義【ブログ歴６年の僕の集大成です】" itemprop="url">ブログ型アフィリエイトの完全講義【ブログ歴６年の僕の集大成です】</a>
+				</h5>
+				
+				<!-- サムネイルの表示 -->
+				<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+					<a style="background-image:url(https://manablog.org/wp-content/uploads/2020/11/shutterstock_1454298563-e1605980690220.jpg);" href="../../../2020/2020 11/page1/11:23/index.html" title="クラウドソーシングで稼げない人の特徴【僕は３０００万を稼いだ】" itemprop="url" class="thumbnail-img"></a>
+				</div>
+		
+				<!-- タイトル表示 -->
+				<h5 class="title" itemprop="name headline">
+					<a href="../../../2020/2020 11/page1/11:23/index.html" title="クラウドソーシングで稼げない人の特徴【僕は３０００万を稼いだ】" itemprop="url">クラウドソーシングで稼げない人の特徴【僕は３０００万を稼いだ】</a>
+				</h5>
+				
+				<!-- サムネイルの表示 -->
+				<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+					<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/06/e467380e916dc58ebc01366c57a66445.jpg);" href="../../../2018/2018 6/page2/6:19/index.html" title="【完全初心者向け】プログラミング学習の始め方【３ヶ月で達成できる】" itemprop="url" class="thumbnail-img"></a>
+				</div>
+		
+				<!-- タイトル表示 -->
+				<h5 class="title" itemprop="name headline">
+					<a href="../../../2018/2018 6/page2/6:19/index.html" title="【完全初心者向け】プログラミング学習の始め方【３ヶ月で達成できる】" itemprop="url">【完全初心者向け】プログラミング学習の始め方【３ヶ月で達成できる】</a>
+				</h5>
+				
+				<!-- サムネイルの表示 -->
+				<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+					<a style="background-image:url(https://manablog.org/wp-content/uploads/2014/09/2f69353fdd8ffd2b570a01af80692938.jpg);" href="../../../2014/2014 9/9:27/index.html" title="【独学でWeb制作マスター】勉強方法のまとめ【初心者向け】" itemprop="url" class="thumbnail-img"></a>
+				</div>
+		
+				<!-- タイトル表示 -->
+				<h5 class="title" itemprop="name headline">
+					<a href="../../../2014/2014 9/9:27/index.html" title="【独学でWeb制作マスター】勉強方法のまとめ【初心者向け】" itemprop="url">【独学でWeb制作マスター】勉強方法のまとめ【初心者向け】</a>
+				</h5>
+				
+				<!-- サムネイルの表示 -->
+				<div itemscope="" itemtype="http://schema.org/ImageObject" class="thumbnail">
+					<a style="background-image:url(https://manablog.org/wp-content/uploads/2018/01/shutterstock_626339195.jpg);" href="../../../2018/2018 1/page1/1:31/index.html" title="Twitterでフォロワーを増やす方法【失敗する理由は超簡単です】" itemprop="url" class="thumbnail-img"></a>
+				</div>
+		
+				<!-- タイトル表示 -->
+				<h5 class="title" itemprop="name headline">
+					<a href="../../../2018/2018 1/page1/1:31/index.html" title="Twitterでフォロワーを増やす方法【失敗する理由は超簡単です】" itemprop="url">Twitterでフォロワーを増やす方法【失敗する理由は超簡単です】</a>
+				</h5>
+				
+			</div>
+		
+			<div class="col-xs-12 archive">
+				<h4>Archive</h4>
+				<hr>
+				<ul class="list-unstyled">
+						<li><a href="../../../2022/2022 9/index.html">2022年9月</a>&nbsp;(3)</li>
+			<li><a href="../../../2022/2022 8/index.html">2022年8月</a>&nbsp;(1)</li>
+			<li><a href="../../../2022/2022 7/index.html">2022年7月</a>&nbsp;(1)</li>
+			<li><a href="../../../2022/2022 5/index.html">2022年5月</a>&nbsp;(1)</li>
+			<li><a href="../../../2022/2022 3/index.html">2022年3月</a>&nbsp;(1)</li>
+			<li><a href="../../../2022/2022 2/index.html">2022年2月</a>&nbsp;(2)</li>
+			<li><a href="../../../2022/2022 1/index.html">2022年1月</a>&nbsp;(3)</li>
+			<li><a href="../../../2021/2021 5/index.html">2021年5月</a>&nbsp;(1)</li>
+			<li><a href="../../../2021/2021 4/index.html">2021年4月</a>&nbsp;(1)</li>
+			<li><a href="../../../2021/2021 3/index.html">2021年3月</a>&nbsp;(1)</li>
+			<li><a href="../../../2020/2020 12/index.html">2020年12月</a>&nbsp;(2)</li>
+			<li><a href="../../../2020/2020 11/index.html">2020年11月</a>&nbsp;(15)</li>
+			<li><a href="../../../2020/2020 10/index.html">2020年10月</a>&nbsp;(10)</li>
+			<li><a href="../../../2020/2020 9/index.html">2020年9月</a>&nbsp;(16)</li>
+			<li><a href="../../../2020/2020 8/index.html">2020年8月</a>&nbsp;(10)</li>
+			<li><a href="../../../2020/2020 7/index.html">2020年7月</a>&nbsp;(20)</li>
+			<li><a href="../../../2020/2020 6/index.html">2020年6月</a>&nbsp;(24)</li>
+			<li><a href="../../../2020/2020 1/index.html">2020年1月</a>&nbsp;(10)</li>
+			<li><a href="../../../2019/2019 12/index.html">2019年12月</a>&nbsp;(31)</li>
+			<li><a href="../../../2019/2019 11/index.html">2019年11月</a>&nbsp;(30)</li>
+			<li><a href="../../../2019/2019 10/index.html">2019年10月</a>&nbsp;(31)</li>
+			<li><a href="../../../2019/2019 9/index.html">2019年9月</a>&nbsp;(30)</li>
+			<li><a href="../../../2019/2019 8/index.html">2019年8月</a>&nbsp;(31)</li>
+			<li><a href="../../../2019/2019 7/index.html">2019年7月</a>&nbsp;(31)</li>
+			<li><a href="../../../2019/2019 6/index.html">2019年6月</a>&nbsp;(30)</li>
+			<li><a href="../../../2019/2019 5/index.html">2019年5月</a>&nbsp;(31)</li>
+			<li><a href="../../../2019/2019 4/index.html">2019年4月</a>&nbsp;(30)</li>
+			<li><a href="../../../2019/2019 3/index.html">2019年3月</a>&nbsp;(31)</li>
+			<li><a href="../../../2019/2019 2/index.html">2019年2月</a>&nbsp;(28)</li>
+			<li><a href="../../../2019/2019 1/index.html">2019年1月</a>&nbsp;(31)</li>
+			<li><a href="../../../2018/2018 12/index.html">2018年12月</a>&nbsp;(31)</li>
+			<li><a href="../../../2018/2018 11/index.html">2018年11月</a>&nbsp;(30)</li>
+			<li><a href="../../../2018/2018 10/index.html">2018年10月</a>&nbsp;(31)</li>
+			<li><a href="../../../2018/2018 9/index.html">2018年9月</a>&nbsp;(30)</li>
+			<li><a href="../../../2018/2018 8/index.html">2018年8月</a>&nbsp;(31)</li>
+			<li><a href="../../../2018/2018 7/index.html">2018年7月</a>&nbsp;(31)</li>
+			<li><a href="../../../2018/2018 6/index.html">2018年6月</a>&nbsp;(30)</li>
+			<li><a href="../../../2018/2018 5/index.html">2018年5月</a>&nbsp;(31)</li>
+			<li><a href="../../../2018/2018 4/index.html">2018年4月</a>&nbsp;(30)</li>
+			<li><a href="../../../2018/2018 3/index.html">2018年3月</a>&nbsp;(32)</li>
+			<li><a href="../../../2018/2018 2/index.html">2018年2月</a>&nbsp;(29)</li>
+			<li><a href="../../../2018/2018 1/index.html">2018年1月</a>&nbsp;(31)</li>
+			<li><a href="../../../2017/2017 12/index.html">2017年12月</a>&nbsp;(31)</li>
+			<li><a href="../../../2017/2017 11/index.html">2017年11月</a>&nbsp;(30)</li>
+			<li><a href="../../../2017/2017 10/index.html">2017年10月</a>&nbsp;(31)</li>
+			<li><a href="../../../2017/2017 9/index.html">2017年9月</a>&nbsp;(30)</li>
+			<li><a href="../../../2017/2017 8/index.html">2017年8月</a>&nbsp;(31)</li>
+			<li><a href="../../../2017/2017 7/index.html">2017年7月</a>&nbsp;(33)</li>
+			<li><a href="../../../2017/2017 6/index.html">2017年6月</a>&nbsp;(28)</li>
+			<li><a href="../../../2017/2017 5/index.html">2017年5月</a>&nbsp;(32)</li>
+			<li><a href="../../../2017/2017 4/index.html">2017年4月</a>&nbsp;(17)</li>
+			<li><a href="../../../2017/2017 3/index.html">2017年3月</a>&nbsp;(16)</li>
+			<li><a href="../../../2017/2017 2/index.html">2017年2月</a>&nbsp;(14)</li>
+			<li><a href="../../../2017/2017 1/index.html">2017年1月</a>&nbsp;(22)</li>
+			<li><a href="../../../2016/2016 12/index.html">2016年12月</a>&nbsp;(3)</li>
+			<li><a href="../../../2016/2016 11/index.html">2016年11月</a>&nbsp;(14)</li>
+			<li><a href="../../../2016/2016 10/index.html">2016年10月</a>&nbsp;(10)</li>
+			<li><a href="../../../2016/2016 9/index.html">2016年9月</a>&nbsp;(12)</li>
+			<li><a href="../../../2016/2016 8/index.html">2016年8月</a>&nbsp;(8)</li>
+			<li><a href="../../../2016/2016 7/index.html">2016年7月</a>&nbsp;(6)</li>
+			<li><a href="../../../2016/2016 6/index.html">2016年6月</a>&nbsp;(3)</li>
+			<li><a href="../../../2016/2016 4/index.html">2016年4月</a>&nbsp;(1)</li>
+			<li><a href="../../../2016/2016 3/index.html">2016年3月</a>&nbsp;(1)</li>
+			<li><a href="../../../2016/2016 2/index.html">2016年2月</a>&nbsp;(1)</li>
+			<li><a href="../../../2016/2016 1/index.html">2016年1月</a>&nbsp;(3)</li>
+			<li><a href="../../../2015/2015 10/index.html">2015年10月</a>&nbsp;(3)</li>
+			<li><a href="../../../2015/2015 9/index.html">2015年9月</a>&nbsp;(3)</li>
+			<li><a href="../../../2015/2015 8/index.html">2015年8月</a>&nbsp;(3)</li>
+			<li><a href="../../../2015/2015 7/index.html">2015年7月</a>&nbsp;(3)</li>
+			<li><a href="../../../2015/2015 6/index.html">2015年6月</a>&nbsp;(4)</li>
+			<li><a href="../../../2015/2015 5/index.html">2015年5月</a>&nbsp;(3)</li>
+			<li><a href="../../../2015/2015 4/index.html">2015年4月</a>&nbsp;(5)</li>
+			<li><a href="../../../2015/2015 3/index.html">2015年3月</a>&nbsp;(11)</li>
+			<li><a href="../../../2015/2015 2/index.html">2015年2月</a>&nbsp;(10)</li>
+			<li><a href="../../../2015/2015 1/index.html">2015年1月</a>&nbsp;(6)</li>
+			<li><a href="../../../2014/2014 12/index.html">2014年12月</a>&nbsp;(7)</li>
+			<li><a href="../../../2014/2014 11/index.html">2014年11月</a>&nbsp;(13)</li>
+			<li><a href="../../../2014/2014 10/index.html">2014年10月</a>&nbsp;(7)</li>
+			<li><a href="../../../2014/2014 9/index.html">2014年9月</a>&nbsp;(10)</li>
+			<li><a href="../../../2014/2014 8/index.html">2014年8月</a>&nbsp;(14)</li>
+			<li><a href="../../../2014/2014 7/index.html">2014年7月</a>&nbsp;(13)</li>
+			<li><a href="../../../2014/2014 6/index.html">2014年6月</a>&nbsp;(2)</li>
+			<li><a href="../../../2014/2014 5/index.html">2014年5月</a>&nbsp;(1)</li>
+			<li><a href="../../../2014/2014 4/index.html">2014年4月</a>&nbsp;(5)</li>
+			<li><a href="../../../2014/2014 3/index.html">2014年3月</a>&nbsp;(2)</li>
+			<li><a href="../../../2014/2014 2/index.html">2014年2月</a>&nbsp;(5)</li>
+			<li><a href="../../../2014/2014 1/index.html">2014年1月</a>&nbsp;(2)</li>
+			<li><a href="../../../2013/2013 12/index.html">2013年12月</a>&nbsp;(6)</li>
+			<li><a href="../../../2013/2013 11/index.html">2013年11月</a>&nbsp;(9)</li>
+			<li><a href="../../../2013/2013 10/index.html">2013年10月</a>&nbsp;(11)</li>
+			<li><a href="../../../2013/2013 9/index.html">2013年9月</a>&nbsp;(8)</li>
+			<li><a href="../../../2013/2013 4/index.html">2013年4月</a>&nbsp;(3)</li>
+			<li><a href="../../../2013/2013 3/index.html">2013年3月</a>&nbsp;(1)</li>
+				</ul>
+			</div>
+		
+		</aside>	</div> <!-- end onf row -->
+</div> <!-- end onf container -->
+
+</main><!-- end main -->
+
+<!-- パンくずリスト -->
+
+<div class="container-fluid breadcrumbs">
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12">
+				<div class="breadcrumbs-inner" itemscope="" itemtype="http://schema.org/BreadcrumbList">
+
+					<span class="" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+						<a href="../../../../index.html" itemprop="item">
+							<span itemprop="name">HOME</span>
+						</a>&gt;&nbsp;
+						<meta itemprop="position" content="1">
+					</span>
+
+					
+						<span class="breadcrumbs" itemprop="itemListElement" itemscope="" itemtype="http://schema.org/ListItem">
+							<a href="../index.html" itemprop="item">
+								<span itemprop="name">2月 2022</span>
+							</a>&gt;&nbsp;
+							<meta itemprop="position" content="2">
+						</span>
+
+					
+					<strong style="color: #7B7B7B;font-size: 14px;font-weight: 300;">Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】</strong>
+
+				</div>
+			</div>
+		</div>
+	</div>
+</div>
+
+<!-- /パンくずリスト -->
+
+<footer id="footer" role="contentinfo" itemscope="itemscope" itemtype="http://schema.org/WPFooter">
+
+	<div class="container">
+		<div class="row">
+			<div class="col-xs-12 col-sm-4">
+				<h4>About me!</h4>
+				<hr>
+				<div style="clear:both"></div>
+				<p>ブログ・アフィリエイト・プログラミングを愛しています。高校生ブロガーです。今はゲームを作るため、プログラムの勉強中です。プログラムに関することをアウトプットしていこうと思います。</p>
+				<a href="../../../../about/index.html" style="color:#337ab7;">» プロフィール詳細はこちら</a><br>
+				<a href="#" style="color:#337ab7;">» サイトマップはこちら</a>
+			</div>
+
+			<div class="col-xs-12 col-sm-4">
+				<h4>Portfolio</h4>
+				<hr>
+				<div style="clear:both"></div>
+				<ul class="list-unstyled">
+					<li><a href="#" target="new" rel="nofollow">お金欲しい</a></li>
+					<li><a href="#" target="new" rel="">yuublog Copy｜当サイトの参考</a></li>
+					<li><a href="#" target="new" rel="nofollow">勉強頑張る</a></li>
+					<li><a href="#" target="new" rel="nofollow">定期テストやばい</a></li>
+					<li><a href="#" target="new" rel="nofollow">僕の人生を変えた本</a></li>
+					<li><a href="#" target="new" rel="nofollow">programming</a></li>
+					<li><a href="#" target="new" rel="nofollow">ゲーム作る</a></li>
+				</ul>
+			</div>
+
+			<div class="col-xs-12 col-sm-4">
+				<h4>Twitter</h4>
+				<hr class="twitter">
+				<div style="clear:both"></div>
+
+				<a class="twitter-timeline" data-width="500" data-height="500" data-chrome="nofooter" href="https://twitter.com/himatubusi208?ref_src=twsrc%5Etfw">Tweets by himatubusi208</a> <script async src="https://platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+			</div>
+		</div>
+	</div>
+
+	<div class="container-fluid credit">
+		<div class="row">
+			<p class="col-xs-12 text-center">Copyright - <a href="https://manablog.org/">yuudai potetto</a>, 2022 All Rights Reserved.</p>
+		</div>
+	</div>
+
+</footer>
+
+
+
+
+<script async="" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/js(1)"></script>
+<!-- <script>
+  window.dataLayer = window.dataLayer || [];
+  function gtag(){dataLayer.push(arguments);}
+  gtag('js', new Date());
+  gtag('config', 'UA-38581881-1');
+</script> -->
+
+<script src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/myscripts-min.js"></script>
+
+<script type="text/javascript">
+function downloadJSAtOnload() {
+	var element = document.createElement("script");
+	element.src = "https://manablog.org/wp-content/themes/manabu/scripts/min/defer-min.js";
+	document.body.appendChild(element);
+}
+if (window.addEventListener)
+	window.addEventListener("load", downloadJSAtOnload, false);
+else if (window.attachEvent)
+	window.attachEvent("onload", downloadJSAtOnload);
+else window.onload = downloadJSAtOnload;
+</script>
+
+<script src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/maftag.js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/saved_resource" id="sandhills-stripe-js-v3-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/accounting.min.js" id="simpay-accounting-js"></script>
+<script type="text/javascript" id="simpay-shared-js-extra">
+/* <![CDATA[ */
+var spGeneral = {"strings":{"currency":"JPY","currencySymbol":"\u00a5","currencyPosition":"left","decimalSeparator":".","thousandSeparator":",","ajaxurl":"https:\/\/manablog.org\/wp-admin\/admin-ajax.php","customAmountLabel":"starting at %s","recurringIntervals":{"day":["day","days"],"week":["week","weeks"],"month":["month","months"],"year":["year","years"]},"recurringIntervalDisplay":"%1$s every %2$s %3$s","recurringIntervalDisplayLimitedDiscount":"%1$s every %2$s %3$s for %4$s months then %5$s","recurringIntervalDisplayAutomaticTaxDiscount":"%1$s every %2$s %3$s until coupon expires","addressRequired":"Enter address to calculate","addressInvalid":"Please enter a valid address"},"booleans":{"isTestMode":false,"isZeroDecimal":true,"scriptDebug":false},"i18n":{"mediaTitle":"Insert Media","mediaButtonText":"Use Image","couponPercentOffText":"%s off","couponAmountOffText":"%s off"},"integers":{"decimalPlaces":0,"minAmount":100}};
+var spGeneral = {"strings":{"currency":"JPY","currencySymbol":"\u00a5","currencyPosition":"left","decimalSeparator":".","thousandSeparator":",","ajaxurl":"https:\/\/manablog.org\/wp-admin\/admin-ajax.php","customAmountLabel":"starting at %s","recurringIntervals":{"day":["day","days"],"week":["week","weeks"],"month":["month","months"],"year":["year","years"]},"recurringIntervalDisplay":"%1$s every %2$s %3$s","recurringIntervalDisplayLimitedDiscount":"%1$s every %2$s %3$s for %4$s months then %5$s","recurringIntervalDisplayAutomaticTaxDiscount":"%1$s every %2$s %3$s until coupon expires","addressRequired":"Enter address to calculate","addressInvalid":"Please enter a valid address"},"booleans":{"isTestMode":false,"isZeroDecimal":true,"scriptDebug":false},"i18n":{"mediaTitle":"Insert Media","mediaButtonText":"Use Image","couponPercentOffText":"%s off","couponAmountOffText":"%s off"},"integers":{"decimalPlaces":0,"minAmount":100}};
+var spGeneral = {"strings":{"currency":"JPY","currencySymbol":"\u00a5","currencyPosition":"left","decimalSeparator":".","thousandSeparator":",","ajaxurl":"https:\/\/manablog.org\/wp-admin\/admin-ajax.php","customAmountLabel":"starting at %s","recurringIntervals":{"day":["day","days"],"week":["week","weeks"],"month":["month","months"],"year":["year","years"]},"recurringIntervalDisplay":"%1$s every %2$s %3$s","recurringIntervalDisplayLimitedDiscount":"%1$s every %2$s %3$s for %4$s months then %5$s","recurringIntervalDisplayAutomaticTaxDiscount":"%1$s every %2$s %3$s until coupon expires","addressRequired":"Enter address to calculate","addressInvalid":"Please enter a valid address"},"booleans":{"isTestMode":false,"isZeroDecimal":true,"scriptDebug":false},"i18n":{"mediaTitle":"Insert Media","mediaButtonText":"Use Image","couponPercentOffText":"%s off","couponAmountOffText":"%s off"},"integers":{"decimalPlaces":0,"minAmount":100}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/simpay-public-shared.min.js" id="simpay-shared-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/underscore.min.js" id="underscore-js"></script>
+<script type="text/javascript" id="wp-util-js-extra">
+/* <![CDATA[ */
+var _wpUtilSettings = {"ajax":{"url":"\/wp-admin\/admin-ajax.php"}};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/wp-util.min.js" id="wp-util-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/backbone.min.js" id="backbone-js"></script>
+<script type="text/javascript" id="wp-api-request-js-extra">
+/* <![CDATA[ */
+var wpApiSettings = {"root":"https:\/\/manablog.org\/wp-json\/","nonce":"86f45025dc","versionString":"wp\/v2\/"};
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/api-request.min.js" id="wp-api-request-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/wp-api.min.js" id="wp-api-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/regenerator-runtime.min.js" id="regenerator-runtime-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/wp-polyfill.min.js" id="wp-polyfill-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/dom-ready.min.js" id="wp-dom-ready-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/hooks.min.js" id="wp-hooks-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/i18n.min.js" id="wp-i18n-js"></script>
+<script type="text/javascript" id="wp-i18n-js-after">
+wp.i18n.setLocaleData( { 'text direction\u0004ltr': [ 'ltr' ] } );
+</script>
+<script type="text/javascript" id="wp-a11y-js-translations">
+( function( domain, translations ) {
+	var localeData = translations.locale_data[ domain ] || translations.locale_data.messages;
+	localeData[""].domain = domain;
+	wp.i18n.setLocaleData( localeData, domain );
+} )( "default", {"translation-revision-date":"2022-11-01 04:41:39+0000","generator":"GlotPress\/4.0.0-alpha.3","domain":"messages","locale_data":{"messages":{"":{"domain":"messages","plural-forms":"nplurals=1; plural=0;","lang":"ja_JP"},"Notifications":["\u901a\u77e5"]}},"comment":{"reference":"wp-includes\/js\/dist\/a11y.js"}} );
+</script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/a11y.min.js" id="wp-a11y-js"></script>
+<script type="text/javascript" id="simpay-public-js-extra">
+/* <![CDATA[ */
+var simplePayForms = [];
+var simplePayForms = [];
+/* ]]> */
+</script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/simpay-public.min.js" id="simpay-public-js"></script>
+<script type="text/javascript" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/simpay-public-pro.min.js" id="simpay-public-pro-js"></script>
+<iframe scrolling="no" frameborder="0" allowtransparency="true" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/widget_iframe.644279d1635fd969e87af94a98bd232b.html" title="Twitter settings iframe" style="display: none;"></iframe><iframe name="__privateStripeMetricsController7950" frameborder="0" allowtransparency="true" scrolling="no" role="presentation" allow="payment *" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/m-outer-3437aaddcdf6922d623e172c2d6f9278.html" aria-hidden="true" tabindex="-1" style="border: none !important; margin: 0px !important; padding: 0px !important; width: 1px !important; min-width: 100% !important; overflow: hidden !important; display: block !important; visibility: hidden !important; position: fixed !important; height: 1px !important; pointer-events: none !important; user-select: none !important;"></iframe><p id="a11y-speak-intro-text" class="a11y-speak-intro-text" style="position: absolute;margin: -1px;padding: 0;height: 1px;width: 1px;overflow: hidden;clip: rect(1px, 1px, 1px, 1px);-webkit-clip-path: inset(50%);clip-path: inset(50%);border: 0;word-wrap: normal !important;" hidden="hidden">通知</p><div id="a11y-speak-assertive" class="a11y-speak-region" style="position: absolute;margin: -1px;padding: 0;height: 1px;width: 1px;overflow: hidden;clip: rect(1px, 1px, 1px, 1px);-webkit-clip-path: inset(50%);clip-path: inset(50%);border: 0;word-wrap: normal !important;" aria-live="assertive" aria-relevant="additions text" aria-atomic="true"></div><div id="a11y-speak-polite" class="a11y-speak-region" style="position: absolute;margin: -1px;padding: 0;height: 1px;width: 1px;overflow: hidden;clip: rect(1px, 1px, 1px, 1px);-webkit-clip-path: inset(50%);clip-path: inset(50%);border: 0;word-wrap: normal !important;" aria-live="polite" aria-relevant="additions text" aria-atomic="true"></div><iframe id="rufous-sandbox" scrolling="no" frameborder="0" allowtransparency="true" allowfullscreen="true" style="position: absolute; visibility: hidden; display: none; width: 0px; height: 0px; padding: 0px; border: none;" title="Twitter analytics iframe" src="./Solidityで「Faucetアプリ」を作る方法【Web3.jsでメタマスクと連携】_files/saved_resource.html"></iframe></body><!-- Global site tag (gtag.js) - Google Analytics --></html>
