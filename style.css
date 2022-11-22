@@ -1,0 +1,56 @@
+p{
+  text-align: left;
+  padding: 20px;
+  color: black;
+}
+
+h2{
+  padding: 10px;
+}
+a{
+  text-decoration: none;
+}
+
+@media(min-width:1130px){
+  footer{
+    display: flex;
+  }
+  .mainWrapper{
+    position:relative;
+    height: 1500px;
+  }
+  .archive{
+    position: absolute;
+    right: 100px;
+    top: 0;
+  }
+  .blog{
+    width:300px;
+    margin: 0 auto;
+  }
+  .favorite{
+    position: absolute;
+    right: 0px;
+    top: 250px;
+  }
+  .article{
+    position: absolute;
+    left: 100px;
+    top:50px;
+    width: 600px;
+  }
+}
+@media(max-width:1130px){
+  .article{
+    max-width: 400px;
+  }
+  .blog{
+    width: 300px;
+    margin: 0 auto 50px;
+  }
+  .map{
+    width:300px;
+    margin: 0 auto;
+    margin: 0 auto 50px;
+  }
+}
